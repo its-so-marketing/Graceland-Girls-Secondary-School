@@ -6,394 +6,401 @@
 <title>Graceland Girls' Secondary School — Gulu, Uganda</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --indigo:#650015;
-    --indigo-deep:#111B31;
-    --gold:#E3A028;
-    --clay:#A8451F;
-    --acacia:#4B7A4E;
-    --cream:#F7F1E4;
-    --paper:#FCF9F1;
-    --ink:#211C16;
-    --ink-soft:#5B5346;
-    --line: rgba(33,28,22,0.14);
-    --radius: 2px;
+    --paper:#FAFAF9;
+    --card:#FFFFFF;
+    --ink:#111114;
+    --ink-soft:#5B5B62;
+    --signal:#1D4ED8;
+    --signal-deep:#132F87;
+    --sun:#FFC53D;
+    --line:rgba(17,17,20,0.11);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Work Sans', sans-serif;
-    font-size:16px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
+    background:var(--paper); color:var(--ink);
+    font-family:'Inter', sans-serif; font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+    cursor:auto;
   }
   img{max-width:100%; display:block;}
   a{color:inherit; text-decoration:none;}
-  h1,h2,h3,h4{font-family:'Fraunces', serif; font-weight:600; line-height:1.08; letter-spacing:-0.01em;}
-  .eyebrow{
-    font-family:'Space Mono', monospace;
-    text-transform:uppercase;
-    letter-spacing:0.14em;
-    font-size:0.72rem;
-    font-weight:700;
+  h1,h2,h3{font-family:'Space Grotesk', sans-serif; font-weight:700; line-height:1.05; letter-spacing:-0.02em;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:0.7rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--signal);
+    display:inline-flex; align-items:center; gap:8px;
   }
-  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  .tag .dot{width:5px; height:5px; background:var(--signal); border-radius:50%;}
+  .wrap{max-width:1200px; margin:0 auto; padding:0 40px;}
+  section{padding:112px 0; position:relative;}
+  @media (max-width:880px){ section{padding:72px 0;} .wrap{padding:0 24px;} }
 
-  /* ---------- signature element: kitenge weave band ---------- */
-  .weave{
-    height:16px;
-    width:100%;
-    background:
-      conic-gradient(from 45deg at 50% 50%, var(--gold) 0 25%, transparent 0 50%, var(--clay) 0 75%, transparent 0) ,
-      conic-gradient(from 45deg at 50% 50%, var(--acacia) 0 25%, transparent 0 50%, var(--gold) 0 75%, transparent 0);
-    background-size: 16px 16px, 16px 16px;
-    background-position: 0 0, 8px 8px;
-    background-color:var(--indigo);
+  /* ---------- custom hero cursor ---------- */
+  .geo-cursor{
+    position:fixed; top:0; left:0; z-index:200; pointer-events:none;
+    width:64px; height:64px; margin:-32px 0 0 -32px;
+    border:1px solid rgba(255,255,255,0.85); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; transition:opacity .25s ease, transform .08s ease-out;
+    mix-blend-mode:difference;
   }
-  .weave.thin{height:8px; background-size:10px 10px, 10px 10px; background-position:0 0, 5px 5px;}
+  .geo-cursor.active{opacity:1;}
+  .geo-cursor span{font-family:'IBM Plex Mono',monospace; font-size:0.55rem; color:#fff; letter-spacing:0.03em; white-space:nowrap;}
+  @media (pointer:coarse){ .geo-cursor{display:none;} }
+
+  /* ---------- reveal utility ---------- */
+  .reveal{opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.16,.84,.44,1), transform .7s cubic-bezier(.16,.84,.44,1);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  .reveal-stagger > *{opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal-stagger.in > *{opacity:1; transform:translateY(0);}
+  .reveal-stagger.in > *:nth-child(1){transition-delay:.02s;}
+  .reveal-stagger.in > *:nth-child(2){transition-delay:.09s;}
+  .reveal-stagger.in > *:nth-child(3){transition-delay:.16s;}
+  .reveal-stagger.in > *:nth-child(4){transition-delay:.23s;}
+  .reveal-stagger.in > *:nth-child(5){transition-delay:.30s;}
+  .reveal-stagger.in > *:nth-child(6){transition-delay:.37s;}
+  .reveal-stagger.in > *:nth-child(7){transition-delay:.44s;}
+  .reveal-stagger.in > *:nth-child(8){transition-delay:.51s;}
+
+  /* ---------- image curtain-wipe reveal ---------- */
+  .wipe-frame{position:relative; overflow:hidden; border-radius:8px; border:1px solid var(--line);}
+  .wipe-frame::after{
+    content:""; position:absolute; inset:0; background:var(--signal); z-index:2;
+    transform-origin:right; transform:scaleX(1); transition:transform .9s cubic-bezier(.76,0,.24,1);
+  }
+  .wipe-frame.in::after{transform:scaleX(0);}
+  .wipe-frame img{transform:scale(1.12); transition:transform 1.4s cubic-bezier(.16,.84,.44,1);}
+  .wipe-frame.in img{transform:scale(1);}
 
   /* ---------- nav ---------- */
   header{
     position:fixed; top:0; left:0; right:0; z-index:100;
-    background:transparent;
-    transition:background .35s ease, box-shadow .35s ease;
+    background:rgba(250,250,249,0.88); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
   }
-  header.solid{
-    background:var(--indigo);
-    box-shadow:0 6px 18px rgba(0,0,0,0.18);
-  }
-  .navbar{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:20px 32px;
-    max-width:1180px; margin:0 auto;
-  }
-  .brand{
-    display:flex; align-items:center; gap:12px;
-    color:#fff;
-  }
+  .navbar{display:flex; align-items:center; justify-content:space-between; padding:18px 40px; max-width:1200px; margin:0 auto;}
+  .brand{display:flex; align-items:center; gap:11px;}
   .brand-mark{
-    width:38px; height:38px; border-radius:50%;
-    background:var(--gold);
+    width:32px; height:32px; border-radius:6px; background:var(--ink);
     display:flex; align-items:center; justify-content:center;
-    font-family:'Fraunces',serif; font-weight:700; color:var(--indigo-deep); font-size:1.05rem;
-    flex-shrink:0;
+    color:var(--sun); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:0.95rem;
   }
-  .brand-name{
-    font-family:'Fraunces', serif; font-weight:600; font-size:1.02rem; color:#fff;
-    letter-spacing:0.01em;
+  .brand-name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:0.98rem;}
+  nav ul{list-style:none; display:flex; gap:36px;}
+  nav a{font-size:0.9rem; font-weight:500; color:var(--ink-soft); position:relative; padding-bottom:3px;}
+  nav a::after{content:""; position:absolute; left:0; bottom:0; width:0; height:1.5px; background:var(--signal); transition:width .25s ease;}
+  nav a:hover::after, nav a.active::after{width:100%;}
+  nav a.active{color:var(--ink);}
+  .nav-cta{background:var(--ink); color:#fff; padding:10px 18px; border-radius:6px; font-size:0.85rem; font-weight:600; display:inline-block;}
+  .nav-cta:hover{background:var(--signal-deep);}
+  .menu-toggle{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer;}
+  .menu-toggle span{width:22px; height:2px; background:var(--ink);}
+  @media (max-width:880px){ nav, .nav-cta{display:none;} .menu-toggle{display:flex;} }
+
+  /* ---------- index rail ---------- */
+  .rail{
+    position:fixed; right:26px; top:50%; transform:translateY(-50%); z-index:90;
+    display:flex; flex-direction:column; gap:16px;
   }
-  .brand-name span{display:block; font-family:'Space Mono',monospace; font-size:0.62rem; letter-spacing:0.13em; color:var(--gold); font-weight:700; margin-top:2px;}
-  nav ul{list-style:none; display:flex; gap:34px;}
-  nav a{
-    color:#fff; font-size:0.87rem; font-weight:500;
-    position:relative; padding-bottom:4px;
+  .rail a{display:flex; align-items:center; gap:10px; justify-content:flex-end;}
+  .rail .rdot{width:6px; height:6px; border-radius:50%; background:var(--line); transition:background .25s ease, transform .25s ease;}
+  .rail .rlabel{
+    font-family:'IBM Plex Mono',monospace; font-size:0.62rem; color:var(--ink-soft);
+    opacity:0; transform:translateX(6px); transition:opacity .2s ease, transform .2s ease; letter-spacing:0.03em;
   }
-  nav a::after{
-    content:""; position:absolute; left:0; bottom:0; height:2px; width:0;
-    background:var(--gold); transition:width .25s ease;
-  }
-  nav a:hover::after{width:100%;}
-  .nav-cta{
-    background:var(--gold); color:var(--indigo-deep) !important; font-weight:700 !important;
-    padding:9px 18px; border-radius:2px;
-  }
-  .nav-cta::after{display:none;}
-  .menu-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
-  .menu-toggle span{width:24px; height:2px; background:#fff;}
+  .rail a:hover .rlabel, .rail a.active .rlabel{opacity:1; transform:translateX(0);}
+  .rail a.active .rdot{background:var(--signal); transform:scale(1.6);}
+  @media (max-width:1180px){ .rail{display:none;} }
 
   /* ---------- hero ---------- */
-  .hero{
-    position:relative;
-    min-height:100vh;
-    display:flex; align-items:flex-end;
-    overflow:hidden;
-  }
-  .hero-media{
-    position:absolute; inset:0;
-    background-size:cover; background-position:center 30%;
-    filter:saturate(1.05);
-  }
-  .hero-media::after{
-    content:"";
-    position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(17,27,49,0.35) 0%, rgba(17,27,49,0.15) 35%, rgba(17,27,49,0.92) 100%);
-  }
-  .hero-content{
-    position:relative; z-index:2;
-    color:#fff;
-    padding:0 32px 88px;
-    max-width:1180px;
-    margin:0 auto;
-    width:100%;
-  }
-  .hero-eyebrow{color:var(--gold); margin-bottom:22px; display:flex; align-items:center; gap:10px;}
-  .hero-eyebrow .dot{width:6px;height:6px;background:var(--gold);border-radius:50%;}
-  .hero h1{
-    font-size:clamp(2.4rem, 5.4vw, 4.5rem);
-    max-width:16ch;
-    color:#fff;
-    margin-bottom:24px;
-  }
-  .hero p{
-    max-width:46ch; color:rgba(255,255,255,0.86); font-size:1.05rem; margin-bottom:36px;
-  }
-  .btn-row{display:flex; gap:16px; flex-wrap:wrap;}
-  .btn{
-    font-family:'Space Mono', monospace; font-size:0.78rem; font-weight:700;
-    letter-spacing:0.06em; text-transform:uppercase;
-    padding:15px 26px; border-radius:2px; display:inline-block;
-    border:1px solid transparent;
-  }
-  .btn-solid{background:var(--gold); color:var(--indigo-deep);}
-  .btn-solid:hover{background:#f0b34c;}
-  .btn-outline{border-color:rgba(255,255,255,0.55); color:#fff;}
-  .btn-outline:hover{border-color:#fff; background:rgba(255,255,255,0.08);}
+  .hero{padding:150px 0 0; overflow:hidden;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:60px; align-items:center; padding-bottom:70px;}
+  .hero-eyebrow{margin-bottom:26px;}
+  .line{overflow:hidden; display:block;}
+  .line span{display:block; transform:translateY(105%); animation:lineUp .8s cubic-bezier(.16,.84,.44,1) forwards;}
+  .line:nth-child(1) span{animation-delay:.05s;}
+  .line:nth-child(2) span{animation-delay:.16s;}
+  @keyframes lineUp{ to{ transform:translateY(0);} }
+  .hero h1{font-size:clamp(2.3rem,4.6vw,3.6rem); max-width:13ch; margin-bottom:28px;}
+  .hero p{color:var(--ink-soft); max-width:44ch; font-size:1.08rem; margin-bottom:38px; opacity:0; animation:fadeUp .8s ease forwards; animation-delay:.5s;}
+  .btn-row{display:flex; gap:14px; flex-wrap:wrap; opacity:0; animation:fadeUp .8s ease forwards; animation-delay:.62s;}
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+  .btn{font-size:0.88rem; font-weight:600; padding:14px 24px; border-radius:6px; display:inline-block; will-change:transform;}
+  .btn-solid{background:var(--ink); color:#fff;}
+  .btn-solid:hover{background:var(--signal-deep);}
+  .btn-outline{border:1px solid var(--line); color:var(--ink);}
+  .btn-outline:hover{border-color:var(--ink);}
 
-  /* ---------- stat band ---------- */
-  .stats{
-    background:var(--indigo);
-    color:#fff;
+  .hero-slideshow{position:relative; height:520px; border-radius:10px; overflow:hidden; border:1px solid var(--line);}
+  .hslide{position:absolute; inset:0; opacity:0; transition:opacity 1.4s ease;}
+  .hslide.active{opacity:1;}
+  .hslide img{width:100%; height:100%; object-fit:cover; transform:scale(1.06); animation:kenburns 9s ease-in-out infinite alternate;}
+  @keyframes kenburns{ from{transform:scale(1.06) translate(0,0);} to{transform:scale(1.16) translate(-1.5%, -1%);} }
+  .hero-slideshow .geo-badge{
+    position:absolute; bottom:16px; left:16px; z-index:3;
+    display:inline-flex; align-items:center; gap:8px; background:var(--ink); color:#fff;
+    padding:7px 13px; border-radius:5px; font-family:'IBM Plex Mono',monospace; font-size:0.66rem; font-weight:600;
   }
-  .stats-grid{
-    display:grid; grid-template-columns:repeat(4,1fr);
+  .signal-ping{width:7px; height:7px; border-radius:50%; background:var(--sun); position:relative;}
+  .signal-ping::after{
+    content:""; position:absolute; inset:-5px; border-radius:50%; border:1.5px solid var(--sun);
+    animation:ping 1.8s ease-out infinite;
   }
-  .stat{
-    padding:44px 28px; text-align:center;
-    border-right:1px solid rgba(255,255,255,0.12);
+  @keyframes ping{ 0%{transform:scale(0.4); opacity:1;} 100%{transform:scale(1.9); opacity:0;} }
+  .slide-dots{position:absolute; bottom:16px; right:16px; z-index:3; display:flex; gap:7px;}
+  .slide-dots button{width:7px; height:7px; border-radius:50%; border:none; background:rgba(255,255,255,0.45); cursor:pointer; padding:0;}
+  .slide-dots button.active{background:#fff;}
+  @media (max-width:880px){ .hero{padding-top:120px;} .hero-grid{grid-template-columns:1fr; gap:34px;} .hero-slideshow{height:320px;} }
+
+  /* ---------- ticker ---------- */
+  .ticker{background:var(--ink); overflow:hidden; padding:14px 0; white-space:nowrap;}
+  .ticker-track{display:inline-flex; animation:tick 26s linear infinite;}
+  .ticker-track span{
+    font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:rgba(255,255,255,0.75);
+    padding:0 28px; display:inline-flex; align-items:center; gap:28px; text-transform:uppercase; letter-spacing:0.05em;
   }
+  .ticker-track span::after{content:"—"; color:var(--sun);}
+  @keyframes tick{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* ---------- stat strip ---------- */
+  .stats{background:var(--card); border-bottom:1px solid var(--line);}
+  .stats-grid{display:grid; grid-template-columns:repeat(4,1fr);}
+  .stat{padding:44px 32px; border-right:1px solid var(--line);}
   .stat:last-child{border-right:none;}
-  .stat .num{font-family:'Fraunces',serif; font-size:2.6rem; font-weight:600; color:var(--gold);}
-  .stat .label{font-family:'Space Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.75); margin-top:6px;}
+  .stat .num{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:2.6rem; color:var(--signal);}
+  .stat .label{font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-soft); margin-top:8px;}
+  @media (max-width:880px){ .stats-grid{grid-template-columns:repeat(2,1fr);} .stat{border-bottom:1px solid var(--line);} }
 
-  /* ---------- section generic ---------- */
-  section{padding:104px 0;}
-  .section-head{max-width:640px; margin-bottom:56px;}
-  .section-head .eyebrow{color:var(--clay); margin-bottom:14px;}
-  .section-head h2{font-size:clamp(1.9rem, 3.4vw, 2.7rem); color:var(--indigo-deep);}
-  .section-head p{color:var(--ink-soft); margin-top:16px; font-size:1.02rem; max-width:56ch;}
+  /* ---------- section head ---------- */
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:32px; margin-bottom:56px; flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(1.8rem,3.2vw,2.5rem); max-width:14ch;}
+  .section-head .desc{max-width:38ch; color:var(--ink-soft); font-size:0.98rem;}
 
   /* ---------- about ---------- */
-  .about-grid{
-    display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:center;
-  }
-  .about-photo{position:relative;}
-  .about-photo img{border-radius:2px; width:100%; height:520px; object-fit:cover;}
-  .about-photo .frame{
-    position:absolute; top:-18px; left:-18px; right:18px; bottom:18px;
-    border:2px solid var(--gold); z-index:-1;
-  }
+  .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:center;}
+  .about-photo img{width:100%; height:480px; object-fit:cover;}
   .about-copy p{color:var(--ink-soft); margin-bottom:18px; font-size:1.02rem;}
-  .badge-row{display:flex; gap:14px; margin-top:30px; flex-wrap:wrap;}
-  .badge{
-    display:flex; align-items:center; gap:10px;
-    border:1px solid var(--line); padding:10px 16px; border-radius:2px;
-    font-family:'Space Mono',monospace; font-size:0.72rem; letter-spacing:0.04em; color:var(--indigo);
+  .quote-block{border-left:2px solid var(--signal); padding-left:20px; margin:28px 0; font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:1.15rem; color:var(--ink);}
+  .credential-row{display:flex; gap:12px; margin-top:24px; flex-wrap:wrap;}
+  .credential{border:1px solid var(--line); border-radius:6px; padding:9px 14px; font-size:0.78rem; font-weight:500; color:var(--ink-soft); display:flex; align-items:center; gap:8px;}
+  .credential .dot{width:6px; height:6px; border-radius:50%; background:var(--signal);}
+  @media (max-width:880px){ .about-grid{grid-template-columns:1fr; gap:36px;} .about-photo img{height:300px;} }
+
+  /* ---------- filmstrip ---------- */
+  .filmstrip-wrap{overflow:hidden; padding:36px 0;}
+  .filmstrip{display:flex; gap:18px; width:max-content; animation:scrollstrip 34s linear infinite;}
+  .filmstrip-wrap:hover .filmstrip{animation-play-state:paused;}
+  .filmstrip figure{position:relative; flex-shrink:0; border-radius:8px; overflow:hidden; border:1px solid var(--line);}
+  .filmstrip img{height:230px; width:320px; object-fit:cover; transition:transform .5s ease;}
+  .filmstrip figure:hover img{transform:scale(1.06);}
+  .filmstrip figcaption{
+    position:absolute; bottom:10px; left:10px; background:rgba(17,17,20,0.75); color:#fff;
+    font-family:'IBM Plex Mono',monospace; font-size:0.62rem; padding:5px 9px; border-radius:4px; letter-spacing:0.03em;
   }
-  .badge .seal{width:8px; height:8px; background:var(--acacia); border-radius:50%; flex-shrink:0;}
+  @keyframes scrollstrip{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
 
   /* ---------- pillars ---------- */
-  .pillars{background:var(--cream);}
-  .pillar-grid{
-    display:grid; grid-template-columns:repeat(4,1fr); gap:2px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
-  .pillar{
-    background:var(--paper);
-    padding:36px 28px;
-  }
-  .pillar .icon{
-    width:44px; height:44px; margin-bottom:22px;
-    display:flex; align-items:center; justify-content:center;
-    border-radius:50%; background:var(--indigo);
-  }
-  .pillar .icon svg{width:22px; height:22px; stroke:var(--gold); fill:none; stroke-width:1.6;}
-  .pillar h3{font-size:1.12rem; color:var(--indigo-deep); margin-bottom:10px; font-weight:600;}
-  .pillar p{font-size:0.92rem; color:var(--ink-soft);}
+  .pillars{background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .pillar-grid{display:grid; grid-template-columns:repeat(4,1fr); perspective:900px;}
+  .pillar{padding:34px 30px; border-right:1px solid var(--line); transition:transform .12s ease, box-shadow .2s ease; will-change:transform;}
+  .pillar:last-child{border-right:none;}
+  .pillar .icon{width:38px; height:38px; margin-bottom:22px;}
+  .pillar .icon svg{width:100%; height:100%; stroke:var(--signal); fill:none; stroke-width:1.5;}
+  .pillar h3{font-size:1.05rem; margin-bottom:10px; font-weight:600;}
+  .pillar p{font-size:0.9rem; color:var(--ink-soft);}
+  @media (max-width:880px){ .pillar-grid{grid-template-columns:1fr 1fr;} .pillar{border-right:none; border-bottom:1px solid var(--line);} }
 
   /* ---------- academics ---------- */
-  .academics-grid{
-    display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:center;
+  .academics-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;}
+  .catalog{border-top:1px solid var(--line);}
+  .catalog-row{
+    display:flex; justify-content:space-between; align-items:center; padding:17px 4px;
+    border-bottom:1px solid var(--line); position:relative; transition:padding-left .3s ease, background .3s ease;
   }
-  .academics-grid img{border-radius:2px; width:100%; height:480px; object-fit:cover;}
-  .chip-cloud{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
-  .chip{
-    font-family:'Space Mono',monospace; font-size:0.74rem; letter-spacing:0.02em;
-    padding:9px 15px; border-radius:20px;
-    border:1px solid var(--line); color:var(--indigo);
-    position:relative;
-  }
-  .chip:nth-child(3n+1){border-color:var(--gold); }
-  .chip:nth-child(3n+2){border-color:var(--clay);}
-  .chip:nth-child(3n+3){border-color:var(--acacia);}
+  .catalog-row.active{padding-left:16px; background:#F4F6FF;}
+  .catalog-row.active::before{content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--signal);}
+  .catalog-row .name{font-weight:500; font-size:1rem;}
+  .catalog-row .code{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--ink-soft);}
+  .academics-copy p{color:var(--ink-soft); margin-bottom:18px; font-size:1.02rem;}
+  @media (max-width:880px){ .academics-grid{grid-template-columns:1fr; gap:16px;} }
 
   /* ---------- facilities ---------- */
-  .facilities{background:var(--indigo-deep); color:#fff;}
-  .facilities .section-head .eyebrow{color:var(--gold);}
-  .facilities .section-head h2{color:#fff;}
-  .facilities .section-head p{color:rgba(255,255,255,0.68);}
-  .fac-grid{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
-    background:rgba(255,255,255,0.12);
-    border:1px solid rgba(255,255,255,0.12);
-  }
-  .fac-card{
-    background:var(--indigo-deep);
-    padding:34px 30px;
-  }
-  .fac-card .n{font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--gold); letter-spacing:0.1em;}
-  .fac-card h3{font-size:1.08rem; margin:14px 0 8px; font-weight:600;}
-  .fac-card p{font-size:0.88rem; color:rgba(255,255,255,0.6);}
+  .facilities{background:var(--ink); color:#fff;}
+  .facilities .desc{color:rgba(255,255,255,0.6);}
+  .fac-list{border-top:1px solid rgba(255,255,255,0.14);}
+  .fac-row{display:grid; grid-template-columns:60px 1fr 1.4fr; gap:24px; align-items:center; padding:24px 0; border-bottom:1px solid rgba(255,255,255,0.14);}
+  .fac-row .idx{font-family:'IBM Plex Mono',monospace; color:var(--sun); font-size:0.85rem;}
+  .fac-row h3{font-size:1.05rem; font-weight:600;}
+  .fac-row p{font-size:0.9rem; color:rgba(255,255,255,0.6);}
+  @media (max-width:700px){ .fac-row{grid-template-columns:40px 1fr; row-gap:6px;} .fac-row p{grid-column:2;} }
 
   /* ---------- join ---------- */
-  .join-grid{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
-  }
-  .join-card{
-    border:1px solid var(--line); padding:36px 30px; border-radius:2px;
-    transition:border-color .2s ease, transform .2s ease;
-  }
-  .join-card:hover{border-color:var(--gold); transform:translateY(-3px);}
-  .join-card .icon{width:38px; height:38px; margin-bottom:22px;}
-  .join-card .icon svg{width:100%; height:100%; stroke:var(--clay); fill:none; stroke-width:1.5;}
-  .join-card h3{font-size:1.15rem; color:var(--indigo-deep); margin-bottom:10px;}
-  .join-card p{font-size:0.9rem; color:var(--ink-soft); margin-bottom:20px;}
-  .join-card .go{font-family:'Space Mono',monospace; font-size:0.72rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--clay);}
+  .join-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; perspective:900px;}
+  .join-card{background:var(--card); padding:36px 30px; transition:transform .12s ease, background .2s ease; will-change:transform;}
+  .join-card:hover{background:#F4F6FF;}
+  .join-card .icon{width:34px; height:34px; margin-bottom:22px;}
+  .join-card .icon svg{width:100%; height:100%; stroke:var(--signal); fill:none; stroke-width:1.5;}
+  .join-card h3{font-size:1.1rem; margin-bottom:10px; font-weight:600;}
+  .join-card p{font-size:0.9rem; color:var(--ink-soft); margin-bottom:22px;}
+  .join-card .go{font-size:0.82rem; font-weight:600; color:var(--signal); display:inline-block;}
+  @media (max-width:880px){ .join-grid{grid-template-columns:1fr;} }
 
   /* ---------- contact ---------- */
-  .contact{background:var(--cream);}
-  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px;}
-  .contact-item{margin-bottom:26px;}
-  .contact-item .eyebrow{color:var(--acacia); margin-bottom:6px;}
+  .contact-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:64px;}
+  .geo-big{font-family:'IBM Plex Mono',monospace; font-size:1.4rem; font-weight:600; color:var(--signal); margin-bottom:10px; display:flex; align-items:center; gap:10px;}
+  .contact-item{margin-bottom:24px;}
+  .contact-item .tag{margin-bottom:6px;}
   .contact-item p, .contact-item a{color:var(--ink-soft); font-size:1rem;}
-  .contact-item a:hover{color:var(--clay);}
-  .map-box{
-    border:1px solid var(--line); border-radius:2px; padding:34px;
-    background:var(--paper);
-  }
-  .map-box h3{font-size:1.2rem; color:var(--indigo-deep); margin-bottom:14px;}
-  .map-box .btn{margin-top:18px;}
+  .contact-item a:hover{color:var(--signal);}
+  .map-box{border:1px solid var(--line); border-radius:10px; padding:32px; background:var(--card);}
+  .map-box h3{font-size:1.15rem; margin-bottom:12px;}
+  .map-box p{color:var(--ink-soft); font-size:0.92rem; margin-bottom:22px;}
+  @media (max-width:880px){ .contact-grid{grid-template-columns:1fr; gap:36px;} }
 
   /* ---------- footer ---------- */
-  footer{background:var(--indigo-deep); color:rgba(255,255,255,0.55); padding:36px 0;}
+  footer{border-top:1px solid var(--line); padding:32px 0;}
   .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
-  .footer-row .eyebrow{color:rgba(255,255,255,0.4);}
-  .footer-brand{color:#fff; font-family:'Fraunces',serif; font-size:0.95rem;}
-
-  /* ---------- responsive ---------- */
-  @media (max-width: 880px){
-    nav, .nav-cta{display:none;}
-    .menu-toggle{display:flex;}
-    .stats-grid{grid-template-columns:repeat(2,1fr);}
-    .stat{border-bottom:1px solid rgba(255,255,255,0.12);}
-    .about-grid, .academics-grid, .contact-grid{grid-template-columns:1fr; gap:40px;}
-    .about-photo img, .academics-grid img{height:340px;}
-    .pillar-grid{grid-template-columns:repeat(2,1fr);}
-    .fac-grid, .join-grid{grid-template-columns:1fr;}
-    section{padding:72px 0;}
-    .wrap{padding:0 22px;}
-  }
+  .footer-row .mono{font-size:0.72rem; color:var(--ink-soft); letter-spacing:0.02em;}
+  .footer-brand{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:0.95rem;}
 </style>
 </head>
 <body>
 
-<header id="site-header">
+<div class="geo-cursor" id="geoCursor"><span>02°46'N</span></div>
+
+<header id="siteHeader">
   <div class="navbar">
     <a href="#top" class="brand">
       <div class="brand-mark">G</div>
-      <div class="brand-name">Graceland Girls'<span>SECONDARY SCHOOL · GULU</span></div>
+      <div class="brand-name">Graceland Girls'</div>
     </a>
     <nav>
       <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#academics">Academics</a></li>
-        <li><a href="#facilities">Facilities</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about" data-nav>About</a></li>
+        <li><a href="#academics" data-nav>Academics</a></li>
+        <li><a href="#facilities" data-nav>Facilities</a></li>
+        <li><a href="#contact" data-nav>Contact</a></li>
       </ul>
     </nav>
-    <a href="#join" class="nav-cta">Apply Now</a>
+    <a href="#join" class="nav-cta magnetic">Apply Now</a>
     <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 
+<div class="rail">
+  <a href="#about" data-rail><span class="rlabel">§01 About</span><span class="rdot"></span></a>
+  <a href="#academics" data-rail><span class="rlabel">§02 Academics</span><span class="rdot"></span></a>
+  <a href="#facilities" data-rail><span class="rlabel">§03 Facilities</span><span class="rdot"></span></a>
+  <a href="#join" data-rail><span class="rlabel">§04 Join</span><span class="rdot"></span></a>
+  <a href="#contact" data-rail><span class="rlabel">§05 Contact</span><span class="rdot"></span></a>
+</div>
+
 <div id="top" class="hero">
-  <div class="hero-media" style="background-image:url('https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_1600,h_1108,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg');"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow eyebrow"><span class="dot"></span> Gulu &middot; Northern Uganda &middot; Established 2009</div>
-    <h1>Building the brightest future for students through education</h1>
-    <p>On 6.3 acres in the heart of Gulu, just over 400 girls learn, board, and grow inside a school built for their ambitions — licensed by the Ministry of Education &amp; Sports and registered with UNEB.</p>
-    <div class="btn-row">
-      <a href="#about" class="btn btn-solid">About Graceland</a>
-      <a href="#join" class="btn btn-outline">Student Applications</a>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="tag hero-eyebrow"><span class="dot"></span>GULU, NORTHERN UGANDA — EST. 2009</div>
+      <h1>
+        <span class="line"><span>Where girls get the</span></span>
+        <span class="line"><span>education their ambitions deserve</span></span>
+      </h1>
+      <p>Graceland Girls' Secondary School is a licensed, UNEB-registered school in Gulu, teaching just over 400 students on a 6.3-acre campus — from Senior One straight through to national exams.</p>
+      <div class="btn-row">
+        <a href="#join" class="btn btn-solid magnetic">Apply to Graceland</a>
+        <a href="#academics" class="btn btn-outline magnetic">See Academics</a>
+      </div>
+    </div>
+    <div class="hero-slideshow" id="heroSlides">
+      <div class="hslide active"><img src="https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_1200,h_1400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg" alt="Graceland campus"></div>
+      <div class="hslide"><img src="https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_1200,h_1400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg" alt="Students at Graceland"></div>
+      <div class="hslide"><img src="https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_1200,h_1400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg" alt="Graceland campus grounds"></div>
+      <div class="geo-badge"><span class="signal-ping"></span>02°46'N 32°17'E — LIVE ON CAMPUS</div>
+      <div class="slide-dots" id="slideDots">
+        <button class="active" data-slide="0"></button>
+        <button data-slide="1"></button>
+        <button data-slide="2"></button>
+      </div>
+    </div>
+  </div>
+  <div class="ticker">
+    <div class="ticker-track">
+      <span><span>Applications Open</span><span>Est. 2009</span><span>Gulu, Northern Uganda</span><span>Licensed · Ministry of Education &amp; Sports</span><span>Registered · UNEB</span><span>400+ Students</span></span>
+      <span><span>Applications Open</span><span>Est. 2009</span><span>Gulu, Northern Uganda</span><span>Licensed · Ministry of Education &amp; Sports</span><span>Registered · UNEB</span><span>400+ Students</span></span>
     </div>
   </div>
 </div>
 
-<div class="weave"></div>
-
 <div class="stats">
   <div class="wrap">
-    <div class="stats-grid">
-      <div class="stat"><div class="num">400+</div><div class="label">Students Enrolled</div></div>
-      <div class="stat"><div class="num">2009</div><div class="label">Year Founded</div></div>
-      <div class="stat"><div class="num">6.3</div><div class="label">Acres of Campus</div></div>
-      <div class="stat"><div class="num">13</div><div class="label">Classrooms</div></div>
+    <div class="stats-grid reveal-stagger" data-observe>
+      <div class="stat"><div class="num" data-count="400" data-suffix="+">0</div><div class="label">Students Enrolled</div></div>
+      <div class="stat"><div class="num" data-count="2009">0</div><div class="label">Year Founded</div></div>
+      <div class="stat"><div class="num" data-count="6.3" data-decimal="1">0</div><div class="label">Acres of Campus</div></div>
+      <div class="stat"><div class="num" data-count="13">0</div><div class="label">Classrooms</div></div>
     </div>
   </div>
 </div>
 
 <section id="about">
   <div class="wrap about-grid">
-    <div class="about-photo">
-      <div class="frame"></div>
-      <img src="https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_900,h_1080,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg" alt="Students at Graceland Girls' Secondary School">
+    <div class="wipe-frame reveal" data-observe>
+      <img class="about-photo" src="https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_900,h_1080,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg" alt="Students at Graceland">
     </div>
-    <div class="about-copy">
-      <div class="eyebrow" style="color:var(--clay); margin-bottom:14px;">About Graceland</div>
-      <h2 style="font-size:clamp(1.9rem,3.2vw,2.5rem); color:var(--indigo-deep); margin-bottom:20px;">A nurturing home for ambitious young women</h2>
-      <p>Graceland Girls' Secondary School has stood in the heart of Gulu since January 2009. Our teachers are chosen not only for what they know, but for how they teach — with excellence, structure, patience, and a genuine investment in every student's progress.</p>
-      <p>With just over 400 students, we've kept our school small enough to know each girl by name, while building a foundation solid enough to carry her ambitions well beyond our gates.</p>
-      <div class="badge-row">
-        <div class="badge"><span class="seal"></span> Ministry of Education &amp; Sports Licensed</div>
-        <div class="badge"><span class="seal"></span> Registered with UNEB</div>
+    <div class="about-copy reveal" data-observe>
+      <div class="tag" style="margin-bottom:16px;">§01 — Our Story</div>
+      <h2 style="font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:22px;">A school built for the long term</h2>
+      <p>Graceland opened in January 2009 in Gulu, the largest town in Northern Uganda. We were founded on a simple premise: girls here deserve a secondary school that takes them seriously — qualified teachers, a real campus, and the accreditation to sit them for national exams with confidence.</p>
+      <div class="quote-block">"Not the biggest school in Gulu — a dependable one, cohort after cohort."</div>
+      <p>Northern Uganda has spent two decades rebuilding. Schools that stay open, staffed, and well-run make a disproportionate difference here.</p>
+      <div class="credential-row">
+        <div class="credential"><span class="dot"></span>Ministry of Education &amp; Sports Licensed</div>
+        <div class="credential"><span class="dot"></span>Registered with UNEB</div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="weave thin"></div>
+<div class="filmstrip-wrap">
+  <div class="filmstrip">
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_640,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg" alt="Campus"><figcaption>Campus · Gulu</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_640,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg" alt="Students"><figcaption>Students</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_640,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg" alt="Grounds"><figcaption>Campus Grounds</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_640,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg" alt="Campus"><figcaption>Campus · Gulu</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_640,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg" alt="Students"><figcaption>Students</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_640,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg" alt="Grounds"><figcaption>Campus Grounds</figcaption></figure>
+  </div>
+</div>
 
 <section class="pillars">
   <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">What We Build</div>
-      <h2>Four commitments behind every lesson</h2>
-      <p>These aren't a curriculum checklist — they're the outcomes we measure ourselves against, in the classroom and beyond it.</p>
+    <div class="section-head reveal" data-observe style="margin-bottom:44px;">
+      <h2>What we build</h2>
+      <div class="desc">Four outcomes we measure ourselves against, in the classroom and beyond it.</div>
     </div>
-    <div class="pillar-grid">
-      <div class="pillar">
+    <div class="pillar-grid tilt-group">
+      <div class="pillar tilt-card">
         <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 5v14a2 2 0 0 0 2 2h13V7a2 2 0 0 0-2-2H4Z"/><path d="M4 5a2 2 0 0 1 2-2h13v14"/></svg></div>
         <h3>Curious Minds</h3>
-        <p>Reading widely and seeking new experience, so the world stays worth understanding.</p>
+        <p>Reading beyond the syllabus, treating new experience as part of learning.</p>
       </div>
-      <div class="pillar">
+      <div class="pillar tilt-card">
         <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></div>
         <h3>Independent Learners</h3>
-        <p>Lively, inquiring minds that keep asking questions long after class ends.</p>
+        <p>Working through a problem without needing every step walked through.</p>
       </div>
-      <div class="pillar">
+      <div class="pillar tilt-card">
         <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3 2 12l10 9 10-9-10-9Z"/></svg></div>
         <h3>Confident Individuals</h3>
-        <p>Prepared to step outside the comfort zone and make the most of every opportunity.</p>
+        <p>Comfortable outside what's familiar, ready when opportunity appears.</p>
       </div>
-      <div class="pillar">
+      <div class="pillar tilt-card">
         <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg></div>
         <h3>Responsible Citizens</h3>
-        <p>Contributing positively at home in Gulu, and to the wider world beyond it.</p>
+        <p>An education that benefits Gulu and Uganda, not just themselves.</p>
       </div>
     </div>
   </div>
@@ -401,105 +408,89 @@
 
 <section id="academics">
   <div class="wrap academics-grid">
-    <div>
-      <div class="section-head" style="margin-bottom:26px;">
-        <div class="eyebrow" style="color:var(--clay);">Academics at Graceland</div>
-        <h2>A full timetable, taught well</h2>
-        <p>Qualified, knowledgeable teachers lead every subject below — not an exhaustive list, but the core of a Graceland education.</p>
-      </div>
-      <div class="chip-cloud">
-        <span class="chip">English Language &amp; Literature</span>
-        <span class="chip">Mathematics</span>
-        <span class="chip">Science</span>
-        <span class="chip">Religious Education</span>
-        <span class="chip">Agriculture</span>
-        <span class="chip">Fine Art</span>
-        <span class="chip">Economics</span>
-        <span class="chip">Entrepreneurship</span>
-      </div>
+    <div class="academics-copy reveal" data-observe>
+      <div class="tag" style="margin-bottom:16px;">§02 — Academics</div>
+      <h2 style="font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:22px;">Taught by people who know it well</h2>
+      <p>Our 6.3-acre campus is built around one job: teaching well, every day, for four years straight. We hire trained, qualified teachers and expect them to lead — not just deliver a syllabus, but help each student think and work independently.</p>
+      <p>Our subjects cover the core secondary curriculum required for UNEB examinations.</p>
     </div>
-    <img src="https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_1000,h_1200,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg" alt="Graceland campus grounds, Gulu">
+    <div class="catalog" id="catalog">
+      <div class="catalog-row"><span class="name">English Language &amp; Literature</span><span class="code">CORE</span></div>
+      <div class="catalog-row"><span class="name">Mathematics</span><span class="code">CORE</span></div>
+      <div class="catalog-row"><span class="name">Science</span><span class="code">CORE</span></div>
+      <div class="catalog-row"><span class="name">Religious Education</span><span class="code">CORE</span></div>
+      <div class="catalog-row"><span class="name">Agriculture</span><span class="code">APPLIED</span></div>
+      <div class="catalog-row"><span class="name">Fine Art</span><span class="code">APPLIED</span></div>
+      <div class="catalog-row"><span class="name">Economics</span><span class="code">APPLIED</span></div>
+      <div class="catalog-row"><span class="name">Entrepreneurship</span><span class="code">APPLIED</span></div>
+    </div>
   </div>
 </section>
 
 <section id="facilities" class="facilities">
   <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">On Campus</div>
-      <h2>Facilities built for daily life, not just lessons</h2>
-      <p>Across 6.3 acres, the campus holds everything a boarding school day requires.</p>
+    <div class="section-head reveal" data-observe style="margin-bottom:44px;">
+      <h2 style="color:#fff;">On campus</h2>
+      <div class="desc">Facilities built for daily life, not just lessons.</div>
     </div>
-    <div class="fac-grid">
-      <div class="fac-card"><div class="n">01</div><h3>13 Classrooms</h3><p>In active daily use across every year group.</p></div>
-      <div class="fac-card"><div class="n">02</div><h3>Dining Hall</h3><p>Seats all 400 students for shared meals.</p></div>
-      <div class="fac-card"><div class="n">03</div><h3>Library</h3><p>A quiet space for reading beyond the syllabus.</p></div>
-      <div class="fac-card"><div class="n">04</div><h3>Science Laboratory</h3><p>Hands-on space for practical coursework.</p></div>
-      <div class="fac-card"><div class="n">05</div><h3>Students' Canteen</h3><p>A second gathering point outside class hours.</p></div>
-      <div class="fac-card"><div class="n">06</div><h3>Boarding &amp; Sick Bay</h3><p>On-site accommodation with dedicated student care.</p></div>
+    <div class="fac-list reveal-stagger" data-observe>
+      <div class="fac-row"><span class="idx">01</span><h3>Classrooms</h3><p>13 classrooms in active daily use across every year group.</p></div>
+      <div class="fac-row"><span class="idx">02</span><h3>Dining Hall</h3><p>Seats all 400 students for shared meals.</p></div>
+      <div class="fac-row"><span class="idx">03</span><h3>Library</h3><p>A quiet space for reading beyond the syllabus.</p></div>
+      <div class="fac-row"><span class="idx">04</span><h3>Science Laboratory</h3><p>Hands-on space for practical coursework.</p></div>
+      <div class="fac-row"><span class="idx">05</span><h3>Students' Canteen</h3><p>A second gathering point outside class hours.</p></div>
+      <div class="fac-row"><span class="idx">06</span><h3>Boarding &amp; Sick Bay</h3><p>On-site accommodation with dedicated student care.</p></div>
     </div>
   </div>
 </section>
 
 <section id="join">
   <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow" style="color:var(--clay);">Join Graceland</div>
-      <h2>Three ways to become part of the school</h2>
-      <p>Whether you're a prospective student, a parent, or looking to teach here — here's where to start.</p>
+    <div class="section-head reveal" data-observe>
+      <h2>Join Graceland</h2>
+      <div class="desc">Three ways to become part of the school.</div>
     </div>
-    <div class="join-grid">
-      <a href="https://www.gracelandgirlsschool.com/join-graceland" class="join-card">
+    <div class="join-grid tilt-group">
+      <a href="https://www.gracelandgirlsschool.com/join-graceland" class="join-card tilt-card">
         <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></div>
         <h3>Student Applications</h3>
-        <p>Apply for a place at Graceland Girls' Secondary School for the coming term.</p>
-        <span class="go">Start an application &rarr;</span>
+        <p>Apply as a boarding student — places open each year, subject to availability.</p>
+        <span class="go magnetic">Email Admissions →</span>
       </a>
-      <a href="https://www.gracelandgirlsschool.com/join-graceland" class="join-card">
+      <a href="https://www.gracelandgirlsschool.com/join-graceland" class="join-card tilt-card">
         <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>
         <h3>Careers at Graceland</h3>
         <p>We hire trained, qualified teachers who lead with knowledge and patience.</p>
-        <span class="go">View openings &rarr;</span>
+        <span class="go magnetic">Enquire About Openings →</span>
       </a>
-      <a href="https://www.gracelandgirlsschool.com/latest-news-at-graceland" class="join-card">
+      <a href="https://www.gracelandgirlsschool.com/latest-news-at-graceland" class="join-card tilt-card">
         <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H8l-4 4V4Z"/></svg></div>
-        <h3>Newsletter</h3>
-        <p>Termly updates on school life, results, and events from Gulu.</p>
-        <span class="go">Subscribe &rarr;</span>
+        <h3>Partners &amp; Donors</h3>
+        <p>Support an established, accredited school already teaching 400+ students.</p>
+        <span class="go magnetic">Contact Us →</span>
       </a>
     </div>
   </div>
 </section>
 
-<div class="weave"></div>
-
-<section id="contact" class="contact">
+<section id="contact">
   <div class="wrap contact-grid">
-    <div>
-      <div class="section-head" style="margin-bottom:30px;">
-        <div class="eyebrow" style="color:var(--acacia);">Visit or Reach Us</div>
-        <h2 style="font-size:clamp(1.7rem,3vw,2.3rem);">Find Graceland</h2>
-      </div>
-      <div class="contact-item">
-        <div class="eyebrow">Address</div>
-        <p>PO Box 783, Gulu, Uganda<br>2km from Custom's Corner, along Gulu–Pakwach (Arua) Road</p>
-      </div>
-      <div class="contact-item">
-        <div class="eyebrow">Phone</div>
-        <a href="tel:+256774608926">+256 774 608 926</a>
-      </div>
-      <div class="contact-item">
-        <div class="eyebrow">Email</div>
-        <a href="mailto:info.gracelandgulu@gmail.com">info.gracelandgulu@gmail.com</a>
-      </div>
-      <div class="contact-item">
-        <div class="eyebrow">Facebook</div>
-        <a href="https://www.facebook.com/gracelandgirlsschool/" target="_blank" rel="noopener">facebook.com/gracelandgirlsschool</a>
-      </div>
+    <div class="reveal" data-observe>
+      <div class="tag" style="margin-bottom:16px;">§03 — Visit or Reach Us</div>
+      <h2 style="font-size:clamp(1.7rem,3vw,2.3rem); margin-bottom:20px;">Find Graceland</h2>
+      <div class="geo-big"><span class="signal-ping"></span>02°46'N, 32°17'E</div>
+      <p style="color:var(--ink-soft); font-size:0.95rem;">Gulu, Northern Uganda — 2km from Custom's Corner, along the Gulu–Pakwach (Arua) Road.</p>
     </div>
-    <div class="map-box">
-      <h3>Get directions</h3>
-      <p style="color:var(--ink-soft); font-size:0.94rem;">Graceland sits just off the Gulu–Pakwach road, a short drive from Custom's Corner — open the map for turn-by-turn directions.</p>
-      <a href="https://www.google.co.uk/maps/place/Graceland+Girls'+Secondary+School/@2.9626357,30.9147116,17z/data=!3m1!4b1!4m5!3m4!1s0x176e61770f14e821:0x8fccae02806f6909!8m2!3d2.9626357!4d30.9169003?authuser=3" target="_blank" rel="noopener" class="btn btn-solid" style="color:var(--indigo-deep);">Open in Google Maps</a>
+    <div class="reveal" data-observe>
+      <div class="contact-item"><div class="tag">Address</div><p>PO Box 783, Gulu, Uganda</p></div>
+      <div class="contact-item"><div class="tag">Phone</div><a href="tel:+256774608926">+256 774 608 926</a></div>
+      <div class="contact-item"><div class="tag">Email</div><a href="mailto:info.gracelandgulu@gmail.com">info.gracelandgulu@gmail.com</a></div>
+      <div class="contact-item"><div class="tag">Facebook</div><a href="https://www.facebook.com/gracelandgirlsschool/" target="_blank" rel="noopener">facebook.com/gracelandgirlsschool</a></div>
+      <div class="map-box">
+        <h3>Get directions</h3>
+        <p>Open the map for turn-by-turn directions from wherever you're starting.</p>
+        <a href="https://www.google.co.uk/maps/place/Graceland+Girls'+Secondary+School/@2.9626357,30.9147116,17z/data=!3m1!4b1!4m5!3m4!1s0x176e61770f14e821:0x8fccae02806f6909!8m2!3d2.9626357!4d30.9169003?authuser=3" target="_blank" rel="noopener" class="btn btn-solid magnetic">Open in Google Maps</a>
+      </div>
     </div>
   </div>
 </section>
@@ -507,17 +498,117 @@
 <footer>
   <div class="wrap footer-row">
     <div class="footer-brand">Graceland Girls' Secondary School</div>
-    <div class="eyebrow">Licensed · Ministry of Education &amp; Sports &nbsp;|&nbsp; Registered · UNEB</div>
-    <div class="eyebrow">&copy; 2026 Graceland Girls' Secondary School</div>
+    <div class="mono">Licensed · Ministry of Education &amp; Sports &nbsp;|&nbsp; Registered · UNEB</div>
+    <div class="mono">© 2026 Graceland Girls' Secondary School</div>
   </div>
 </footer>
 
 <script>
-  const header = document.getElementById('site-header');
+  // ---- header scroll state ----
+  const header = document.getElementById('siteHeader');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 60) header.classList.add('solid');
-    else header.classList.remove('solid');
+    header.style.boxShadow = window.scrollY > 20 ? '0 4px 20px rgba(0,0,0,0.06)' : 'none';
   });
+
+  // ---- scroll reveal ----
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.18 });
+  document.querySelectorAll('[data-observe]').forEach(el => io.observe(el));
+
+  // ---- count-up stats ----
+  const countEls = document.querySelectorAll('.num[data-count]');
+  const countIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      if (el.dataset.done) return;
+      el.dataset.done = '1';
+      const target = parseFloat(el.dataset.count);
+      const decimals = parseInt(el.dataset.decimal || '0', 10);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1300;
+      const start = performance.now();
+      function step(now){
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const val = target * eased;
+        el.textContent = (decimals ? val.toFixed(decimals) : Math.round(val)) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      countIo.unobserve(el);
+    });
+  }, { threshold: 0.6 });
+  countEls.forEach(el => countIo.observe(el));
+
+  // ---- hero slideshow ----
+  const slides = document.querySelectorAll('#heroSlides .hslide');
+  const dots = document.querySelectorAll('#slideDots button');
+  let slideIdx = 0;
+  function showSlide(i){
+    slides.forEach((s,n) => s.classList.toggle('active', n === i));
+    dots.forEach((d,n) => d.classList.toggle('active', n === i));
+    slideIdx = i;
+  }
+  dots.forEach(d => d.addEventListener('click', () => showSlide(parseInt(d.dataset.slide))));
+  setInterval(() => showSlide((slideIdx + 1) % slides.length), 5000);
+
+  // ---- geo cursor over hero photo ----
+  const heroSlideshow = document.getElementById('heroSlides');
+  const geoCursor = document.getElementById('geoCursor');
+  if (window.matchMedia('(pointer:fine)').matches && heroSlideshow) {
+    heroSlideshow.addEventListener('mousemove', (e) => {
+      geoCursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      geoCursor.classList.add('active');
+    });
+    heroSlideshow.addEventListener('mouseleave', () => geoCursor.classList.remove('active'));
+  }
+
+  // ---- tilt cards ----
+  if (window.matchMedia('(pointer:fine)').matches) {
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `rotateX(${(-y*6).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg) translateZ(0)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = 'rotateX(0) rotateY(0)'; });
+    });
+
+    // ---- magnetic buttons ----
+    document.querySelectorAll('.magnetic').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - (r.left + r.width/2);
+        const y = e.clientY - (r.top + r.height/2);
+        btn.style.transform = `translate(${x*0.18}px, ${y*0.35}px)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0,0)'; });
+    });
+  }
+
+  // ---- scrollspy: nav + rail + catalog active row ----
+  const navLinks = document.querySelectorAll('[data-nav]');
+  const railLinks = document.querySelectorAll('[data-rail]');
+  const sections = ['about','academics','facilities','join','contact'].map(id => document.getElementById(id));
+  const catalogRows = document.querySelectorAll('#catalog .catalog-row');
+
+  const spyIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const id = entry.target.id;
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      railLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach(s => s && spyIo.observe(s));
+
+  const catalogIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => entry.target.classList.toggle('active', entry.isIntersecting));
+  }, { rootMargin: '-40% 0px -40% 0px' });
+  catalogRows.forEach(row => catalogIo.observe(row));
 </script>
 
 </body>
