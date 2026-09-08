@@ -6,17 +6,18 @@
 <title>Graceland Girls' Secondary School — Gulu, Uganda</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#FAFAF9;
-    --card:#FFFFFF;
-    --ink:#111114;
-    --ink-soft:#5B5B62;
-    --signal:#1D4ED8;
-    --signal-deep:#132F87;
-    --sun:#FFC53D;
-    --line:rgba(17,17,20,0.11);
+    --paper:#F7F0E3;
+    --paper-deep:#EFE3CE;
+    --card:#FFFDF8;
+    --ink:#2A1A19;
+    --ink-soft:#6E5C55;
+    --burgundy:#6E1423;
+    --burgundy-deep:#3E0B14;
+    --gold:#C6942F;
+    --line:rgba(42,26,25,0.14);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -24,34 +25,21 @@
     background:var(--paper); color:var(--ink);
     font-family:'Inter', sans-serif; font-size:16px; line-height:1.6;
     -webkit-font-smoothing:antialiased; overflow-x:hidden;
-    cursor:auto;
   }
   img{max-width:100%; display:block;}
   a{color:inherit; text-decoration:none;}
   h1,h2,h3{font-family:'Space Grotesk', sans-serif; font-weight:700; line-height:1.05; letter-spacing:-0.02em;}
-  .mono{font-family:'IBM Plex Mono', monospace;}
+  .accent{font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:600;}
   .tag{
-    font-family:'IBM Plex Mono', monospace; font-size:0.7rem; font-weight:600;
-    text-transform:uppercase; letter-spacing:0.08em; color:var(--signal);
-    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:600;
+    font-size:1.02rem; letter-spacing:0.01em; color:var(--burgundy);
+    display:inline-flex; align-items:center; gap:9px;
   }
-  .tag .dot{width:5px; height:5px; background:var(--signal); border-radius:50%;}
+  .tag .dot{width:6px; height:6px; background:var(--burgundy); border-radius:50%; position:relative; flex-shrink:0;}
+  .label-sm{font-family:'Inter',sans-serif; font-size:0.68rem; font-weight:600; text-transform:uppercase; letter-spacing:0.09em; color:var(--ink-soft);}
   .wrap{max-width:1200px; margin:0 auto; padding:0 40px;}
   section{padding:112px 0; position:relative;}
   @media (max-width:880px){ section{padding:72px 0;} .wrap{padding:0 24px;} }
-
-  /* ---------- custom hero cursor ---------- */
-  .geo-cursor{
-    position:fixed; top:0; left:0; z-index:200; pointer-events:none;
-    width:64px; height:64px; margin:-32px 0 0 -32px;
-    border:1px solid rgba(255,255,255,0.85); border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    opacity:0; transition:opacity .25s ease, transform .08s ease-out;
-    mix-blend-mode:difference;
-  }
-  .geo-cursor.active{opacity:1;}
-  .geo-cursor span{font-family:'IBM Plex Mono',monospace; font-size:0.55rem; color:#fff; letter-spacing:0.03em; white-space:nowrap;}
-  @media (pointer:coarse){ .geo-cursor{display:none;} }
 
   /* ---------- reveal utility ---------- */
   .reveal{opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.16,.84,.44,1), transform .7s cubic-bezier(.16,.84,.44,1);}
@@ -64,13 +52,11 @@
   .reveal-stagger.in > *:nth-child(4){transition-delay:.23s;}
   .reveal-stagger.in > *:nth-child(5){transition-delay:.30s;}
   .reveal-stagger.in > *:nth-child(6){transition-delay:.37s;}
-  .reveal-stagger.in > *:nth-child(7){transition-delay:.44s;}
-  .reveal-stagger.in > *:nth-child(8){transition-delay:.51s;}
 
   /* ---------- image curtain-wipe reveal ---------- */
   .wipe-frame{position:relative; overflow:hidden; border-radius:8px; border:1px solid var(--line);}
   .wipe-frame::after{
-    content:""; position:absolute; inset:0; background:var(--signal); z-index:2;
+    content:""; position:absolute; inset:0; background:var(--burgundy); z-index:2;
     transform-origin:right; transform:scaleX(1); transition:transform .9s cubic-bezier(.76,0,.24,1);
   }
   .wipe-frame.in::after{transform:scaleX(0);}
@@ -80,91 +66,76 @@
   /* ---------- nav ---------- */
   header{
     position:fixed; top:0; left:0; right:0; z-index:100;
-    background:rgba(250,250,249,0.88); backdrop-filter:blur(10px);
+    background:rgba(247,240,227,0.88); backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
   .navbar{display:flex; align-items:center; justify-content:space-between; padding:18px 40px; max-width:1200px; margin:0 auto;}
   .brand{display:flex; align-items:center; gap:11px;}
   .brand-mark{
-    width:32px; height:32px; border-radius:6px; background:var(--ink);
+    width:32px; height:32px; border-radius:6px; background:var(--burgundy);
     display:flex; align-items:center; justify-content:center;
-    color:var(--sun); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:0.95rem;
+    color:var(--gold); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:0.95rem;
   }
   .brand-name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:0.98rem;}
   nav ul{list-style:none; display:flex; gap:36px;}
   nav a{font-size:0.9rem; font-weight:500; color:var(--ink-soft); position:relative; padding-bottom:3px;}
-  nav a::after{content:""; position:absolute; left:0; bottom:0; width:0; height:1.5px; background:var(--signal); transition:width .25s ease;}
+  nav a::after{content:""; position:absolute; left:0; bottom:0; width:0; height:1.5px; background:var(--burgundy); transition:width .25s ease;}
   nav a:hover::after, nav a.active::after{width:100%;}
   nav a.active{color:var(--ink);}
-  .nav-cta{background:var(--ink); color:#fff; padding:10px 18px; border-radius:6px; font-size:0.85rem; font-weight:600; display:inline-block;}
-  .nav-cta:hover{background:var(--signal-deep);}
+  .nav-cta{background:var(--burgundy); color:#fff; padding:10px 18px; border-radius:6px; font-size:0.85rem; font-weight:600; display:inline-block;}
+  .nav-cta:hover{background:var(--burgundy-deep);}
   .menu-toggle{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer;}
   .menu-toggle span{width:22px; height:2px; background:var(--ink);}
   @media (max-width:880px){ nav, .nav-cta{display:none;} .menu-toggle{display:flex;} }
 
   /* ---------- index rail ---------- */
-  .rail{
-    position:fixed; right:26px; top:50%; transform:translateY(-50%); z-index:90;
-    display:flex; flex-direction:column; gap:16px;
-  }
+  .rail{position:fixed; right:26px; top:50%; transform:translateY(-50%); z-index:90; display:flex; flex-direction:column; gap:16px;}
   .rail a{display:flex; align-items:center; gap:10px; justify-content:flex-end;}
-  .rail .rdot{width:6px; height:6px; border-radius:50%; background:var(--line); transition:background .25s ease, transform .25s ease;}
-  .rail .rlabel{
-    font-family:'IBM Plex Mono',monospace; font-size:0.62rem; color:var(--ink-soft);
-    opacity:0; transform:translateX(6px); transition:opacity .2s ease, transform .2s ease; letter-spacing:0.03em;
-  }
+  .rail .rdot{width:6px; height:6px; border-radius:50%; background:rgba(42,26,25,0.22); transition:background .25s ease, transform .25s ease;}
+  .rail .rlabel{font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.82rem; color:var(--ink-soft); opacity:0; transform:translateX(6px); transition:opacity .2s ease, transform .2s ease;}
   .rail a:hover .rlabel, .rail a.active .rlabel{opacity:1; transform:translateX(0);}
-  .rail a.active .rdot{background:var(--signal); transform:scale(1.6);}
+  .rail a.active .rdot{background:var(--burgundy); transform:scale(1.6);}
   @media (max-width:1180px){ .rail{display:none;} }
 
-  /* ---------- hero ---------- */
-  .hero{padding:150px 0 0; overflow:hidden;}
-  .hero-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:60px; align-items:center; padding-bottom:70px;}
-  .hero-eyebrow{margin-bottom:26px;}
+  /* ---------- hero: full-bleed ---------- */
+  .hero{position:relative; min-height:100vh; display:flex; align-items:flex-end; overflow:hidden;}
+  .hero-bg{position:absolute; inset:0;}
+  .hslide{position:absolute; inset:0; opacity:0; background-size:cover; background-position:center 32%; transition:opacity 1.6s ease; transform:scale(1.05);}
+  .hslide.active{opacity:1; animation:kenburns 10s ease-in-out infinite alternate;}
+  @keyframes kenburns{ from{transform:scale(1.05) translate(0,0);} to{transform:scale(1.16) translate(-1.5%,-1%);} }
+  .hero-scrim{position:absolute; inset:0; z-index:1; background:linear-gradient(190deg, rgba(62,11,20,0.18) 0%, rgba(62,11,20,0.32) 38%, rgba(62,11,20,0.94) 100%);}
+  .hero-content{position:relative; z-index:2; padding:0 40px 96px; max-width:1200px; margin:0 auto; width:100%; color:#fff;}
+  .hero-eyebrow{margin-bottom:24px; color:var(--gold);}
+  .hero-eyebrow .dot{background:var(--gold); position:relative;}
+  .hero-eyebrow .dot::after{content:""; position:absolute; inset:-5px; border-radius:50%; border:1.5px solid var(--gold); animation:ping 2s ease-out infinite;}
+  @keyframes ping{ 0%{transform:scale(0.4); opacity:1;} 100%{transform:scale(2.1); opacity:0;} }
   .line{overflow:hidden; display:block;}
   .line span{display:block; transform:translateY(105%); animation:lineUp .8s cubic-bezier(.16,.84,.44,1) forwards;}
   .line:nth-child(1) span{animation-delay:.05s;}
   .line:nth-child(2) span{animation-delay:.16s;}
   @keyframes lineUp{ to{ transform:translateY(0);} }
-  .hero h1{font-size:clamp(2.3rem,4.6vw,3.6rem); max-width:13ch; margin-bottom:28px;}
-  .hero p{color:var(--ink-soft); max-width:44ch; font-size:1.08rem; margin-bottom:38px; opacity:0; animation:fadeUp .8s ease forwards; animation-delay:.5s;}
+  .hero h1{font-size:clamp(2.4rem,5.2vw,4.2rem); max-width:16ch; margin-bottom:26px; color:#fff;}
+  .hero p{color:rgba(255,255,255,0.85); max-width:46ch; font-size:1.08rem; margin-bottom:38px; opacity:0; animation:fadeUp .8s ease forwards; animation-delay:.5s;}
   .btn-row{display:flex; gap:14px; flex-wrap:wrap; opacity:0; animation:fadeUp .8s ease forwards; animation-delay:.62s;}
   @keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
-  .btn{font-size:0.88rem; font-weight:600; padding:14px 24px; border-radius:6px; display:inline-block; will-change:transform;}
-  .btn-solid{background:var(--ink); color:#fff;}
-  .btn-solid:hover{background:var(--signal-deep);}
-  .btn-outline{border:1px solid var(--line); color:var(--ink);}
-  .btn-outline:hover{border-color:var(--ink);}
-
-  .hero-slideshow{position:relative; height:520px; border-radius:10px; overflow:hidden; border:1px solid var(--line);}
-  .hslide{position:absolute; inset:0; opacity:0; transition:opacity 1.4s ease;}
-  .hslide.active{opacity:1;}
-  .hslide img{width:100%; height:100%; object-fit:cover; transform:scale(1.06); animation:kenburns 9s ease-in-out infinite alternate;}
-  @keyframes kenburns{ from{transform:scale(1.06) translate(0,0);} to{transform:scale(1.16) translate(-1.5%, -1%);} }
-  .hero-slideshow .geo-badge{
-    position:absolute; bottom:16px; left:16px; z-index:3;
-    display:inline-flex; align-items:center; gap:8px; background:var(--ink); color:#fff;
-    padding:7px 13px; border-radius:5px; font-family:'IBM Plex Mono',monospace; font-size:0.66rem; font-weight:600;
-  }
-  .signal-ping{width:7px; height:7px; border-radius:50%; background:var(--sun); position:relative;}
-  .signal-ping::after{
-    content:""; position:absolute; inset:-5px; border-radius:50%; border:1.5px solid var(--sun);
-    animation:ping 1.8s ease-out infinite;
-  }
-  @keyframes ping{ 0%{transform:scale(0.4); opacity:1;} 100%{transform:scale(1.9); opacity:0;} }
-  .slide-dots{position:absolute; bottom:16px; right:16px; z-index:3; display:flex; gap:7px;}
-  .slide-dots button{width:7px; height:7px; border-radius:50%; border:none; background:rgba(255,255,255,0.45); cursor:pointer; padding:0;}
-  .slide-dots button.active{background:#fff;}
-  @media (max-width:880px){ .hero{padding-top:120px;} .hero-grid{grid-template-columns:1fr; gap:34px;} .hero-slideshow{height:320px;} }
+  .btn{font-size:0.88rem; font-weight:600; padding:14px 26px; border-radius:6px; display:inline-block; will-change:transform;}
+  .btn-solid{background:var(--burgundy); color:#fff;}
+  .btn-solid:hover{background:var(--burgundy-deep);}
+  .btn-outline{border:1.5px solid rgba(255,255,255,0.55); color:#fff;}
+  .btn-outline:hover{border-color:#fff; background:rgba(255,255,255,0.08);}
+  .slide-dots{position:absolute; z-index:3; bottom:28px; right:40px; display:flex; gap:8px;}
+  .slide-dots button{width:8px; height:8px; border-radius:50%; border:1.5px solid rgba(255,255,255,0.6); background:transparent; cursor:pointer; padding:0;}
+  .slide-dots button.active{background:var(--gold); border-color:var(--gold);}
+  @media (max-width:880px){ .hero-content{padding-bottom:64px;} }
 
   /* ---------- ticker ---------- */
-  .ticker{background:var(--ink); overflow:hidden; padding:14px 0; white-space:nowrap;}
-  .ticker-track{display:inline-flex; animation:tick 26s linear infinite;}
+  .ticker{background:var(--burgundy-deep); overflow:hidden; padding:15px 0; white-space:nowrap;}
+  .ticker-track{display:inline-flex; animation:tick 28s linear infinite;}
   .ticker-track span{
-    font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:rgba(255,255,255,0.75);
-    padding:0 28px; display:inline-flex; align-items:center; gap:28px; text-transform:uppercase; letter-spacing:0.05em;
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:1.02rem; color:rgba(255,255,255,0.82);
+    padding:0 28px; display:inline-flex; align-items:center; gap:28px;
   }
-  .ticker-track span::after{content:"—"; color:var(--sun);}
+  .ticker-track span::after{content:"✦"; color:var(--gold); font-size:0.7rem;}
   @keyframes tick{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
 
   /* ---------- stat strip ---------- */
@@ -172,8 +143,8 @@
   .stats-grid{display:grid; grid-template-columns:repeat(4,1fr);}
   .stat{padding:44px 32px; border-right:1px solid var(--line);}
   .stat:last-child{border-right:none;}
-  .stat .num{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:2.6rem; color:var(--signal);}
-  .stat .label{font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-soft); margin-top:8px;}
+  .stat .num{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:2.6rem; color:var(--burgundy);}
+  .stat .label{margin-top:8px;}
   @media (max-width:880px){ .stats-grid{grid-template-columns:repeat(2,1fr);} .stat{border-bottom:1px solid var(--line);} }
 
   /* ---------- section head ---------- */
@@ -183,34 +154,34 @@
 
   /* ---------- about ---------- */
   .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:center;}
-  .about-photo img{width:100%; height:480px; object-fit:cover;}
+  .about-photo img{width:100%; height:540px; object-fit:cover;}
   .about-copy p{color:var(--ink-soft); margin-bottom:18px; font-size:1.02rem;}
-  .quote-block{border-left:2px solid var(--signal); padding-left:20px; margin:28px 0; font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:1.15rem; color:var(--ink);}
+  .quote-block{border-left:2px solid var(--burgundy); padding-left:20px; margin:28px 0; font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:1.15rem; color:var(--ink);}
   .credential-row{display:flex; gap:12px; margin-top:24px; flex-wrap:wrap;}
-  .credential{border:1px solid var(--line); border-radius:6px; padding:9px 14px; font-size:0.78rem; font-weight:500; color:var(--ink-soft); display:flex; align-items:center; gap:8px;}
-  .credential .dot{width:6px; height:6px; border-radius:50%; background:var(--signal);}
-  @media (max-width:880px){ .about-grid{grid-template-columns:1fr; gap:36px;} .about-photo img{height:300px;} }
+  .credential{border:1px solid var(--line); border-radius:6px; padding:9px 14px; font-size:0.78rem; font-weight:500; color:var(--ink-soft); display:flex; align-items:center; gap:8px; background:var(--card);}
+  .credential .dot{width:6px; height:6px; border-radius:50%; background:var(--burgundy);}
+  @media (max-width:880px){ .about-grid{grid-template-columns:1fr; gap:36px;} .about-photo img{height:320px;} }
 
   /* ---------- filmstrip ---------- */
-  .filmstrip-wrap{overflow:hidden; padding:36px 0;}
+  .filmstrip-wrap{overflow:hidden; padding:36px 0; background:var(--paper-deep);}
   .filmstrip{display:flex; gap:18px; width:max-content; animation:scrollstrip 34s linear infinite;}
   .filmstrip-wrap:hover .filmstrip{animation-play-state:paused;}
   .filmstrip figure{position:relative; flex-shrink:0; border-radius:8px; overflow:hidden; border:1px solid var(--line);}
-  .filmstrip img{height:230px; width:320px; object-fit:cover; transition:transform .5s ease;}
+  .filmstrip img{height:240px; width:340px; object-fit:cover; transition:transform .5s ease;}
   .filmstrip figure:hover img{transform:scale(1.06);}
   .filmstrip figcaption{
-    position:absolute; bottom:10px; left:10px; background:rgba(17,17,20,0.75); color:#fff;
-    font-family:'IBM Plex Mono',monospace; font-size:0.62rem; padding:5px 9px; border-radius:4px; letter-spacing:0.03em;
+    position:absolute; bottom:10px; left:10px; background:rgba(62,11,20,0.82); color:#fff;
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.82rem; padding:5px 11px; border-radius:4px;
   }
   @keyframes scrollstrip{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
 
   /* ---------- pillars ---------- */
   .pillars{background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
   .pillar-grid{display:grid; grid-template-columns:repeat(4,1fr); perspective:900px;}
-  .pillar{padding:34px 30px; border-right:1px solid var(--line); transition:transform .12s ease, box-shadow .2s ease; will-change:transform;}
+  .pillar{padding:34px 30px; border-right:1px solid var(--line); transition:transform .12s ease; will-change:transform;}
   .pillar:last-child{border-right:none;}
   .pillar .icon{width:38px; height:38px; margin-bottom:22px;}
-  .pillar .icon svg{width:100%; height:100%; stroke:var(--signal); fill:none; stroke-width:1.5;}
+  .pillar .icon svg{width:100%; height:100%; stroke:var(--burgundy); fill:none; stroke-width:1.5;}
   .pillar h3{font-size:1.05rem; margin-bottom:10px; font-weight:600;}
   .pillar p{font-size:0.9rem; color:var(--ink-soft);}
   @media (max-width:880px){ .pillar-grid{grid-template-columns:1fr 1fr;} .pillar{border-right:none; border-bottom:1px solid var(--line);} }
@@ -218,60 +189,58 @@
   /* ---------- academics ---------- */
   .academics-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;}
   .catalog{border-top:1px solid var(--line);}
-  .catalog-row{
-    display:flex; justify-content:space-between; align-items:center; padding:17px 4px;
-    border-bottom:1px solid var(--line); position:relative; transition:padding-left .3s ease, background .3s ease;
-  }
-  .catalog-row.active{padding-left:16px; background:#F4F6FF;}
-  .catalog-row.active::before{content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--signal);}
+  .catalog-row{display:flex; justify-content:space-between; align-items:center; padding:17px 4px; border-bottom:1px solid var(--line); position:relative; transition:padding-left .3s ease, background .3s ease;}
+  .catalog-row.active{padding-left:16px; background:rgba(110,20,35,0.06);}
+  .catalog-row.active::before{content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--burgundy);}
   .catalog-row .name{font-weight:500; font-size:1rem;}
-  .catalog-row .code{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--ink-soft);}
+  .catalog-row .code{color:var(--ink-soft);}
   .academics-copy p{color:var(--ink-soft); margin-bottom:18px; font-size:1.02rem;}
   @media (max-width:880px){ .academics-grid{grid-template-columns:1fr; gap:16px;} }
 
-  /* ---------- facilities ---------- */
-  .facilities{background:var(--ink); color:#fff;}
-  .facilities .desc{color:rgba(255,255,255,0.6);}
-  .fac-list{border-top:1px solid rgba(255,255,255,0.14);}
-  .fac-row{display:grid; grid-template-columns:60px 1fr 1.4fr; gap:24px; align-items:center; padding:24px 0; border-bottom:1px solid rgba(255,255,255,0.14);}
-  .fac-row .idx{font-family:'IBM Plex Mono',monospace; color:var(--sun); font-size:0.85rem;}
+  /* ---------- facilities (photo background) ---------- */
+  .facilities{
+    color:#fff;
+    background-image:linear-gradient(180deg, rgba(62,11,20,0.90), rgba(62,11,20,0.95)), url('https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_1600,h_1000,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg');
+    background-size:cover; background-position:center;
+  }
+  .facilities .desc{color:rgba(255,255,255,0.65);}
+  .fac-list{border-top:1px solid rgba(255,255,255,0.18);}
+  .fac-row{display:grid; grid-template-columns:60px 1fr 1.4fr; gap:24px; align-items:center; padding:24px 0; border-bottom:1px solid rgba(255,255,255,0.18);}
+  .fac-row .idx{font-family:'Space Grotesk',sans-serif; color:var(--gold); font-size:0.9rem; font-weight:600;}
   .fac-row h3{font-size:1.05rem; font-weight:600;}
-  .fac-row p{font-size:0.9rem; color:rgba(255,255,255,0.6);}
+  .fac-row p{font-size:0.9rem; color:rgba(255,255,255,0.65);}
   @media (max-width:700px){ .fac-row{grid-template-columns:40px 1fr; row-gap:6px;} .fac-row p{grid-column:2;} }
 
   /* ---------- join ---------- */
   .join-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; perspective:900px;}
   .join-card{background:var(--card); padding:36px 30px; transition:transform .12s ease, background .2s ease; will-change:transform;}
-  .join-card:hover{background:#F4F6FF;}
+  .join-card:hover{background:rgba(110,20,35,0.05);}
   .join-card .icon{width:34px; height:34px; margin-bottom:22px;}
-  .join-card .icon svg{width:100%; height:100%; stroke:var(--signal); fill:none; stroke-width:1.5;}
+  .join-card .icon svg{width:100%; height:100%; stroke:var(--burgundy); fill:none; stroke-width:1.5;}
   .join-card h3{font-size:1.1rem; margin-bottom:10px; font-weight:600;}
   .join-card p{font-size:0.9rem; color:var(--ink-soft); margin-bottom:22px;}
-  .join-card .go{font-size:0.82rem; font-weight:600; color:var(--signal); display:inline-block;}
+  .join-card .go{font-size:0.82rem; font-weight:600; color:var(--burgundy); display:inline-block;}
   @media (max-width:880px){ .join-grid{grid-template-columns:1fr;} }
 
   /* ---------- contact ---------- */
   .contact-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:64px;}
-  .geo-big{font-family:'IBM Plex Mono',monospace; font-size:1.4rem; font-weight:600; color:var(--signal); margin-bottom:10px; display:flex; align-items:center; gap:10px;}
   .contact-item{margin-bottom:24px;}
-  .contact-item .tag{margin-bottom:6px;}
+  .contact-item .tag{margin-bottom:6px; font-size:0.9rem;}
   .contact-item p, .contact-item a{color:var(--ink-soft); font-size:1rem;}
-  .contact-item a:hover{color:var(--signal);}
+  .contact-item a:hover{color:var(--burgundy);}
   .map-box{border:1px solid var(--line); border-radius:10px; padding:32px; background:var(--card);}
   .map-box h3{font-size:1.15rem; margin-bottom:12px;}
   .map-box p{color:var(--ink-soft); font-size:0.92rem; margin-bottom:22px;}
   @media (max-width:880px){ .contact-grid{grid-template-columns:1fr; gap:36px;} }
 
   /* ---------- footer ---------- */
-  footer{border-top:1px solid var(--line); padding:32px 0;}
+  footer{background:var(--burgundy-deep); color:rgba(255,255,255,0.65); padding:34px 0;}
   .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
-  .footer-row .mono{font-size:0.72rem; color:var(--ink-soft); letter-spacing:0.02em;}
-  .footer-brand{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:0.95rem;}
+  .footer-row .label-sm{color:rgba(255,255,255,0.5);}
+  .footer-brand{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:0.95rem; color:#fff;}
 </style>
 </head>
 <body>
-
-<div class="geo-cursor" id="geoCursor"><span>02°46'N</span></div>
 
 <header id="siteHeader">
   <div class="navbar">
@@ -293,54 +262,53 @@
 </header>
 
 <div class="rail">
-  <a href="#about" data-rail><span class="rlabel">§01 About</span><span class="rdot"></span></a>
-  <a href="#academics" data-rail><span class="rlabel">§02 Academics</span><span class="rdot"></span></a>
-  <a href="#facilities" data-rail><span class="rlabel">§03 Facilities</span><span class="rdot"></span></a>
-  <a href="#join" data-rail><span class="rlabel">§04 Join</span><span class="rdot"></span></a>
-  <a href="#contact" data-rail><span class="rlabel">§05 Contact</span><span class="rdot"></span></a>
+  <a href="#about" data-rail><span class="rlabel">About</span><span class="rdot"></span></a>
+  <a href="#academics" data-rail><span class="rlabel">Academics</span><span class="rdot"></span></a>
+  <a href="#facilities" data-rail><span class="rlabel">Facilities</span><span class="rdot"></span></a>
+  <a href="#join" data-rail><span class="rlabel">Join</span><span class="rdot"></span></a>
+  <a href="#contact" data-rail><span class="rlabel">Contact</span><span class="rdot"></span></a>
 </div>
 
 <div id="top" class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="tag hero-eyebrow"><span class="dot"></span>GULU, NORTHERN UGANDA — EST. 2009</div>
-      <h1>
-        <span class="line"><span>Where girls get the</span></span>
-        <span class="line"><span>education their ambitions deserve</span></span>
-      </h1>
-      <p>Graceland Girls' Secondary School is a licensed, UNEB-registered school in Gulu, teaching just over 400 students on a 6.3-acre campus — from Senior One straight through to national exams.</p>
-      <div class="btn-row">
-        <a href="#join" class="btn btn-solid magnetic">Apply to Graceland</a>
-        <a href="#academics" class="btn btn-outline magnetic">See Academics</a>
-      </div>
-    </div>
-    <div class="hero-slideshow" id="heroSlides">
-      <div class="hslide active"><img src="https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_1200,h_1400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg" alt="Graceland campus"></div>
-      <div class="hslide"><img src="https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_1200,h_1400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg" alt="Students at Graceland"></div>
-      <div class="hslide"><img src="https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_1200,h_1400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg" alt="Graceland campus grounds"></div>
-      <div class="geo-badge"><span class="signal-ping"></span>02°46'N 32°17'E — LIVE ON CAMPUS</div>
-      <div class="slide-dots" id="slideDots">
-        <button class="active" data-slide="0"></button>
-        <button data-slide="1"></button>
-        <button data-slide="2"></button>
-      </div>
+  <div class="hero-bg" id="heroSlides">
+    <div class="hslide active" style="background-image:url('https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_1920,h_1280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg');"></div>
+    <div class="hslide" style="background-image:url('https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_1920,h_1280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg');"></div>
+    <div class="hslide" style="background-image:url('https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_1920,h_1280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg');"></div>
+    <div class="hero-scrim"></div>
+  </div>
+  <div class="hero-content">
+    <div class="tag hero-eyebrow"><span class="dot"></span>Gulu, Northern Uganda — Est. 2009</div>
+    <h1>
+      <span class="line"><span>Where girls get the</span></span>
+      <span class="line"><span>education their ambitions deserve</span></span>
+    </h1>
+    <p>Graceland Girls' Secondary School is a licensed, UNEB-registered school in Gulu, teaching just over 400 students on a 6.3-acre campus — from Senior One straight through to national exams.</p>
+    <div class="btn-row">
+      <a href="#join" class="btn btn-solid magnetic">Apply to Graceland</a>
+      <a href="#academics" class="btn btn-outline magnetic">See Academics</a>
     </div>
   </div>
-  <div class="ticker">
-    <div class="ticker-track">
-      <span><span>Applications Open</span><span>Est. 2009</span><span>Gulu, Northern Uganda</span><span>Licensed · Ministry of Education &amp; Sports</span><span>Registered · UNEB</span><span>400+ Students</span></span>
-      <span><span>Applications Open</span><span>Est. 2009</span><span>Gulu, Northern Uganda</span><span>Licensed · Ministry of Education &amp; Sports</span><span>Registered · UNEB</span><span>400+ Students</span></span>
-    </div>
+  <div class="slide-dots" id="slideDots">
+    <button class="active" data-slide="0"></button>
+    <button data-slide="1"></button>
+    <button data-slide="2"></button>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span><span>Applications Open</span><span>Est. 2009</span><span>Gulu, Northern Uganda</span><span>Licensed · Ministry of Education &amp; Sports</span><span>Registered · UNEB</span><span>400+ Students</span></span>
+    <span><span>Applications Open</span><span>Est. 2009</span><span>Gulu, Northern Uganda</span><span>Licensed · Ministry of Education &amp; Sports</span><span>Registered · UNEB</span><span>400+ Students</span></span>
   </div>
 </div>
 
 <div class="stats">
   <div class="wrap">
     <div class="stats-grid reveal-stagger" data-observe>
-      <div class="stat"><div class="num" data-count="400" data-suffix="+">0</div><div class="label">Students Enrolled</div></div>
-      <div class="stat"><div class="num" data-count="2009">0</div><div class="label">Year Founded</div></div>
-      <div class="stat"><div class="num" data-count="6.3" data-decimal="1">0</div><div class="label">Acres of Campus</div></div>
-      <div class="stat"><div class="num" data-count="13">0</div><div class="label">Classrooms</div></div>
+      <div class="stat"><div class="num" data-count="400" data-suffix="+">0</div><div class="label label-sm">Students Enrolled</div></div>
+      <div class="stat"><div class="num" data-count="2009">0</div><div class="label label-sm">Year Founded</div></div>
+      <div class="stat"><div class="num" data-count="6.3" data-decimal="1">0</div><div class="label label-sm">Acres of Campus</div></div>
+      <div class="stat"><div class="num" data-count="13">0</div><div class="label label-sm">Classrooms</div></div>
     </div>
   </div>
 </div>
@@ -351,7 +319,7 @@
       <img class="about-photo" src="https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_900,h_1080,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg" alt="Students at Graceland">
     </div>
     <div class="about-copy reveal" data-observe>
-      <div class="tag" style="margin-bottom:16px;">§01 — Our Story</div>
+      <div class="tag" style="margin-bottom:16px;">Our Story</div>
       <h2 style="font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:22px;">A school built for the long term</h2>
       <p>Graceland opened in January 2009 in Gulu, the largest town in Northern Uganda. We were founded on a simple premise: girls here deserve a secondary school that takes them seriously — qualified teachers, a real campus, and the accreditation to sit them for national exams with confidence.</p>
       <div class="quote-block">"Not the biggest school in Gulu — a dependable one, cohort after cohort."</div>
@@ -366,12 +334,12 @@
 
 <div class="filmstrip-wrap">
   <div class="filmstrip">
-    <figure><img src="https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_640,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg" alt="Campus"><figcaption>Campus · Gulu</figcaption></figure>
-    <figure><img src="https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_640,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg" alt="Students"><figcaption>Students</figcaption></figure>
-    <figure><img src="https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_640,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg" alt="Grounds"><figcaption>Campus Grounds</figcaption></figure>
-    <figure><img src="https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_640,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg" alt="Campus"><figcaption>Campus · Gulu</figcaption></figure>
-    <figure><img src="https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_640,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg" alt="Students"><figcaption>Students</figcaption></figure>
-    <figure><img src="https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_640,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg" alt="Grounds"><figcaption>Campus Grounds</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_680,h_480,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg" alt="Campus"><figcaption>Campus · Gulu</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_680,h_480,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg" alt="Students"><figcaption>Students</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_680,h_480,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg" alt="Grounds"><figcaption>Campus Grounds</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_680,h_480,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg" alt="Campus"><figcaption>Campus · Gulu</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_680,h_480,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg" alt="Students"><figcaption>Students</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_680,h_480,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg" alt="Grounds"><figcaption>Campus Grounds</figcaption></figure>
   </div>
 </div>
 
@@ -409,20 +377,20 @@
 <section id="academics">
   <div class="wrap academics-grid">
     <div class="academics-copy reveal" data-observe>
-      <div class="tag" style="margin-bottom:16px;">§02 — Academics</div>
+      <div class="tag" style="margin-bottom:16px;">Academics</div>
       <h2 style="font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:22px;">Taught by people who know it well</h2>
       <p>Our 6.3-acre campus is built around one job: teaching well, every day, for four years straight. We hire trained, qualified teachers and expect them to lead — not just deliver a syllabus, but help each student think and work independently.</p>
       <p>Our subjects cover the core secondary curriculum required for UNEB examinations.</p>
     </div>
     <div class="catalog" id="catalog">
-      <div class="catalog-row"><span class="name">English Language &amp; Literature</span><span class="code">CORE</span></div>
-      <div class="catalog-row"><span class="name">Mathematics</span><span class="code">CORE</span></div>
-      <div class="catalog-row"><span class="name">Science</span><span class="code">CORE</span></div>
-      <div class="catalog-row"><span class="name">Religious Education</span><span class="code">CORE</span></div>
-      <div class="catalog-row"><span class="name">Agriculture</span><span class="code">APPLIED</span></div>
-      <div class="catalog-row"><span class="name">Fine Art</span><span class="code">APPLIED</span></div>
-      <div class="catalog-row"><span class="name">Economics</span><span class="code">APPLIED</span></div>
-      <div class="catalog-row"><span class="name">Entrepreneurship</span><span class="code">APPLIED</span></div>
+      <div class="catalog-row"><span class="name">English Language &amp; Literature</span><span class="code label-sm">CORE</span></div>
+      <div class="catalog-row"><span class="name">Mathematics</span><span class="code label-sm">CORE</span></div>
+      <div class="catalog-row"><span class="name">Science</span><span class="code label-sm">CORE</span></div>
+      <div class="catalog-row"><span class="name">Religious Education</span><span class="code label-sm">CORE</span></div>
+      <div class="catalog-row"><span class="name">Agriculture</span><span class="code label-sm">APPLIED</span></div>
+      <div class="catalog-row"><span class="name">Fine Art</span><span class="code label-sm">APPLIED</span></div>
+      <div class="catalog-row"><span class="name">Economics</span><span class="code label-sm">APPLIED</span></div>
+      <div class="catalog-row"><span class="name">Entrepreneurship</span><span class="code label-sm">APPLIED</span></div>
     </div>
   </div>
 </section>
@@ -476,10 +444,9 @@
 <section id="contact">
   <div class="wrap contact-grid">
     <div class="reveal" data-observe>
-      <div class="tag" style="margin-bottom:16px;">§03 — Visit or Reach Us</div>
+      <div class="tag" style="margin-bottom:16px;">Visit or Reach Us</div>
       <h2 style="font-size:clamp(1.7rem,3vw,2.3rem); margin-bottom:20px;">Find Graceland</h2>
-      <div class="geo-big"><span class="signal-ping"></span>02°46'N, 32°17'E</div>
-      <p style="color:var(--ink-soft); font-size:0.95rem;">Gulu, Northern Uganda — 2km from Custom's Corner, along the Gulu–Pakwach (Arua) Road.</p>
+      <p style="color:var(--ink-soft); font-size:0.98rem; max-width:36ch;">Gulu, Northern Uganda — 2km from Custom's Corner, along the Gulu–Pakwach (Arua) Road.</p>
     </div>
     <div class="reveal" data-observe>
       <div class="contact-item"><div class="tag">Address</div><p>PO Box 783, Gulu, Uganda</p></div>
@@ -498,8 +465,8 @@
 <footer>
   <div class="wrap footer-row">
     <div class="footer-brand">Graceland Girls' Secondary School</div>
-    <div class="mono">Licensed · Ministry of Education &amp; Sports &nbsp;|&nbsp; Registered · UNEB</div>
-    <div class="mono">© 2026 Graceland Girls' Secondary School</div>
+    <div class="label-sm">Licensed · Ministry of Education &amp; Sports &nbsp;|&nbsp; Registered · UNEB</div>
+    <div class="label-sm">© 2026 Graceland Girls' Secondary School</div>
   </div>
 </footer>
 
@@ -553,17 +520,6 @@
   }
   dots.forEach(d => d.addEventListener('click', () => showSlide(parseInt(d.dataset.slide))));
   setInterval(() => showSlide((slideIdx + 1) % slides.length), 5000);
-
-  // ---- geo cursor over hero photo ----
-  const heroSlideshow = document.getElementById('heroSlides');
-  const geoCursor = document.getElementById('geoCursor');
-  if (window.matchMedia('(pointer:fine)').matches && heroSlideshow) {
-    heroSlideshow.addEventListener('mousemove', (e) => {
-      geoCursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-      geoCursor.classList.add('active');
-    });
-    heroSlideshow.addEventListener('mouseleave', () => geoCursor.classList.remove('active'));
-  }
 
   // ---- tilt cards ----
   if (window.matchMedia('(pointer:fine)').matches) {
