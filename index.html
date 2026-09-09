@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Graceland Girls' Secondary School — Gulu, Uganda</title>
+<link rel="icon" type="image/jpeg" href="https://static.wixstatic.com/media/fb3bdf_2f2d52306e504e9da1626466c1f892ca~mv2.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#F7F0E3;
@@ -28,7 +29,7 @@
   }
   img{max-width:100%; display:block;}
   a{color:inherit; text-decoration:none;}
-  h1,h2,h3{font-family:'Space Grotesk', sans-serif; font-weight:700; line-height:1.05; letter-spacing:-0.02em;}
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:700; line-height:1.08; letter-spacing:-0.01em;}
   .accent{font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:600;}
   .tag{
     font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:600;
@@ -69,14 +70,15 @@
     background:rgba(247,240,227,0.88); backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
-  .navbar{display:flex; align-items:center; justify-content:space-between; padding:18px 40px; max-width:1200px; margin:0 auto;}
-  .brand{display:flex; align-items:center; gap:11px;}
+  .navbar{display:flex; align-items:center; justify-content:space-between; padding:16px 40px; max-width:1200px; margin:0 auto;}
+  .brand{display:flex; align-items:center; gap:12px;}
   .brand-mark{
-    width:32px; height:32px; border-radius:6px; background:var(--burgundy);
-    display:flex; align-items:center; justify-content:center;
-    color:var(--gold); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:0.95rem;
+    width:38px; height:38px; border-radius:8px; background:#fff;
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+    border:1px solid var(--line); flex-shrink:0;
   }
-  .brand-name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:0.98rem;}
+  .brand-mark img{width:100%; height:100%; object-fit:cover;}
+  .brand-name{font-family:'Fraunces',serif; font-weight:700; font-size:1rem;}
   nav ul{list-style:none; display:flex; gap:36px;}
   nav a{font-size:0.9rem; font-weight:500; color:var(--ink-soft); position:relative; padding-bottom:3px;}
   nav a::after{content:""; position:absolute; left:0; bottom:0; width:0; height:1.5px; background:var(--burgundy); transition:width .25s ease;}
@@ -103,7 +105,7 @@
   .hslide{position:absolute; inset:0; opacity:0; background-size:cover; background-position:center 32%; transition:opacity 1.6s ease; transform:scale(1.05);}
   .hslide.active{opacity:1; animation:kenburns 10s ease-in-out infinite alternate;}
   @keyframes kenburns{ from{transform:scale(1.05) translate(0,0);} to{transform:scale(1.16) translate(-1.5%,-1%);} }
-  .hero-scrim{position:absolute; inset:0; z-index:1; background:linear-gradient(190deg, rgba(0,0,0,0) 0%);}
+  .hero-scrim{position:absolute; inset:0; z-index:1; background:linear-gradient(190deg, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.38) 38%, rgba(0,0,0,0.88) 100%);}
   .hero-content{position:relative; z-index:2; padding:0 40px 96px; max-width:1200px; margin:0 auto; width:100%; color:#fff;}
   .hero-eyebrow{margin-bottom:24px; color:var(--gold);}
   .hero-eyebrow .dot{background:var(--gold); position:relative;}
@@ -143,7 +145,7 @@
   .stats-grid{display:grid; grid-template-columns:repeat(4,1fr);}
   .stat{padding:44px 32px; border-right:1px solid var(--line);}
   .stat:last-child{border-right:none;}
-  .stat .num{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:2.6rem; color:var(--burgundy);}
+  .stat .num{font-family:'Fraunces',serif; font-weight:700; font-size:2.6rem; color:var(--burgundy);}
   .stat .label{margin-top:8px;}
   @media (max-width:880px){ .stats-grid{grid-template-columns:repeat(2,1fr);} .stat{border-bottom:1px solid var(--line);} }
 
@@ -153,18 +155,32 @@
   .section-head .desc{max-width:38ch; color:var(--ink-soft); font-size:0.98rem;}
 
   /* ---------- about ---------- */
-  .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:center;}
-  .about-photo img{width:100%; height:540px; object-fit:cover;}
+  .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:76px; align-items:center;}
+  .about-photo-wrap{position:relative;}
+  .wipe-frame.main-shot{border:5px solid var(--card); transform:rotate(-1.6deg); box-shadow:0 22px 44px rgba(42,26,25,0.2);}
+  .about-photo{width:100%; height:540px; object-fit:cover;}
+  .accent-shot{
+    position:absolute; width:40%; aspect-ratio:1/1; bottom:-30px; left:-30px; z-index:3;
+    border-radius:10px; overflow:hidden; border:5px solid var(--card);
+    box-shadow:0 16px 32px rgba(42,26,25,0.28); transform:rotate(6deg);
+    transition:transform .35s ease;
+  }
+  .accent-shot img{width:100%; height:100%; object-fit:cover;}
+  .about-photo-wrap:hover .accent-shot{transform:rotate(-1deg) scale(1.05);}
   .about-copy p{color:var(--ink-soft); margin-bottom:18px; font-size:1.02rem;}
-  .quote-block{border-left:2px solid var(--burgundy); padding-left:20px; margin:28px 0; font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:1.15rem; color:var(--ink);}
+  .quote-block{border-left:2px solid var(--burgundy); padding-left:20px; margin:28px 0; font-family:'Fraunces',serif; font-weight:600; font-size:1.15rem; color:var(--ink);}
   .credential-row{display:flex; gap:12px; margin-top:24px; flex-wrap:wrap;}
   .credential{border:1px solid var(--line); border-radius:6px; padding:9px 14px; font-size:0.78rem; font-weight:500; color:var(--ink-soft); display:flex; align-items:center; gap:8px; background:var(--card);}
   .credential .dot{width:6px; height:6px; border-radius:50%; background:var(--burgundy);}
-  @media (max-width:880px){ .about-grid{grid-template-columns:1fr; gap:36px;} .about-photo img{height:320px;} }
+  @media (max-width:880px){
+    .about-grid{grid-template-columns:1fr; gap:52px;}
+    .about-photo{height:320px;}
+    .accent-shot{width:34%; bottom:-18px; left:14px;}
+  }
 
   /* ---------- filmstrip ---------- */
   .filmstrip-wrap{overflow:hidden; padding:36px 0; background:var(--paper-deep);}
-  .filmstrip{display:flex; gap:18px; width:max-content; animation:scrollstrip 34s linear infinite;}
+  .filmstrip{display:flex; gap:18px; width:max-content; animation:scrollstrip 46s linear infinite;}
   .filmstrip-wrap:hover .filmstrip{animation-play-state:paused;}
   .filmstrip figure{position:relative; flex-shrink:0; border-radius:8px; overflow:hidden; border:1px solid var(--line);}
   .filmstrip img{height:240px; width:340px; object-fit:cover; transition:transform .5s ease;}
@@ -180,9 +196,11 @@
   .pillar-grid{display:grid; grid-template-columns:repeat(4,1fr); perspective:900px;}
   .pillar{padding:34px 30px; border-right:1px solid var(--line); transition:transform .12s ease; will-change:transform;}
   .pillar:last-child{border-right:none;}
-  .pillar .icon{width:38px; height:38px; margin-bottom:22px;}
-  .pillar .icon svg{width:100%; height:100%; stroke:var(--burgundy); fill:none; stroke-width:1.5;}
-  .pillar h3{font-size:1.05rem; margin-bottom:10px; font-weight:600;}
+  .pillar .icon{width:56px; height:56px; border-radius:50%; background:rgba(110,20,35,0.09); display:flex; align-items:center; justify-content:center; margin-bottom:22px;}
+  .pillar .icon svg{width:28px; height:28px; color:var(--burgundy);}
+  .pillar:nth-child(2n) .icon{background:rgba(198,148,47,0.16);}
+  .pillar:nth-child(2n) .icon svg{color:var(--gold);}
+  .pillar h3{font-size:1.08rem; margin-bottom:10px; font-weight:700;}
   .pillar p{font-size:0.9rem; color:var(--ink-soft);}
   @media (max-width:880px){ .pillar-grid{grid-template-columns:1fr 1fr;} .pillar{border-right:none; border-bottom:1px solid var(--line);} }
 
@@ -197,27 +215,48 @@
   .academics-copy p{color:var(--ink-soft); margin-bottom:18px; font-size:1.02rem;}
   @media (max-width:880px){ .academics-grid{grid-template-columns:1fr; gap:16px;} }
 
-  /* ---------- facilities (photo background) ---------- */
-  .facilities{
-    color:#fff;
-    background-image:linear-gradient(180deg, rgba(62,11,20,0.90), rgba(62,11,20,0.95)), url('https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_1600,h_1000,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg');
-    background-size:cover; background-position:center;
-  }
+  /* ---------- facilities: text + photo collage ---------- */
+  .facilities{background:var(--burgundy-deep); color:#fff;}
   .facilities .desc{color:rgba(255,255,255,0.65);}
+  .facilities-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:start;}
   .fac-list{border-top:1px solid rgba(255,255,255,0.18);}
   .fac-row{display:grid; grid-template-columns:60px 1fr 1.4fr; gap:24px; align-items:center; padding:24px 0; border-bottom:1px solid rgba(255,255,255,0.18);}
-  .fac-row .idx{font-family:'Space Grotesk',sans-serif; color:var(--gold); font-size:0.9rem; font-weight:600;}
-  .fac-row h3{font-size:1.05rem; font-weight:600;}
+  .fac-row .idx{font-family:'Fraunces',serif; color:var(--gold); font-size:0.95rem; font-weight:700;}
+  .fac-row h3{font-size:1.05rem; font-weight:700;}
   .fac-row p{font-size:0.9rem; color:rgba(255,255,255,0.65);}
   @media (max-width:700px){ .fac-row{grid-template-columns:40px 1fr; row-gap:6px;} .fac-row p{grid-column:2;} }
+  .collage{position:relative; height:480px;}
+  .collage-item{
+    position:absolute; border-radius:10px; overflow:hidden; border:4px solid rgba(255,255,255,0.14);
+    box-shadow:0 20px 40px rgba(0,0,0,0.4); transition:transform .35s ease, opacity .7s ease;
+    opacity:0; transform:translateY(24px);
+  }
+  .collage-item.in{opacity:1; transform:none;}
+  .collage-item:hover{z-index:5 !important;}
+  .collage-item img{width:100%; height:100%; object-fit:cover; display:block;}
+  .collage-a{width:64%; height:58%; top:0; left:0; z-index:2;}
+  .collage-a.in{transform:rotate(-3deg);}
+  .collage-a:hover{transform:rotate(0deg) scale(1.03) !important;}
+  .collage-b{width:52%; height:48%; bottom:0; right:0; z-index:3;}
+  .collage-b.in{transform:rotate(3deg);}
+  .collage-b:hover{transform:rotate(0deg) scale(1.03) !important;}
+  .collage-c{width:38%; height:36%; top:26%; right:4%; z-index:1;}
+  .collage-c.in{transform:rotate(-5deg);}
+  .collage-c:hover{transform:rotate(0deg) scale(1.03) !important;}
+  @media (max-width:880px){
+    .facilities-grid{grid-template-columns:1fr; gap:12px;}
+    .collage{height:340px; margin-top:20px;}
+  }
 
   /* ---------- join ---------- */
   .join-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; perspective:900px;}
   .join-card{background:var(--card); padding:36px 30px; transition:transform .12s ease, background .2s ease; will-change:transform;}
   .join-card:hover{background:rgba(110,20,35,0.05);}
-  .join-card .icon{width:34px; height:34px; margin-bottom:22px;}
-  .join-card .icon svg{width:100%; height:100%; stroke:var(--burgundy); fill:none; stroke-width:1.5;}
-  .join-card h3{font-size:1.1rem; margin-bottom:10px; font-weight:600;}
+  .join-card .icon{width:52px; height:52px; border-radius:50%; background:rgba(110,20,35,0.09); display:flex; align-items:center; justify-content:center; margin-bottom:22px;}
+  .join-card .icon svg{width:26px; height:26px; color:var(--burgundy);}
+  .join-card:nth-child(2) .icon{background:rgba(198,148,47,0.16);}
+  .join-card:nth-child(2) .icon svg{color:var(--gold);}
+  .join-card h3{font-size:1.12rem; margin-bottom:10px; font-weight:700;}
   .join-card p{font-size:0.9rem; color:var(--ink-soft); margin-bottom:22px;}
   .join-card .go{font-size:0.82rem; font-weight:600; color:var(--burgundy); display:inline-block;}
   @media (max-width:880px){ .join-grid{grid-template-columns:1fr;} }
@@ -237,7 +276,7 @@
   footer{background:var(--burgundy-deep); color:rgba(255,255,255,0.65); padding:34px 0;}
   .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
   .footer-row .label-sm{color:rgba(255,255,255,0.5);}
-  .footer-brand{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:0.95rem; color:#fff;}
+  .footer-brand{font-family:'Fraunces',serif; font-weight:700; font-size:0.98rem; color:#fff;}
 </style>
 </head>
 <body>
@@ -245,8 +284,8 @@
 <header id="siteHeader">
   <div class="navbar">
     <a href="#top" class="brand">
-      <div class="brand-mark">G</div>
-      <div class="brand-name">Graceland Girls Secondary School</div>
+      <div class="brand-mark"><img src="https://static.wixstatic.com/media/fb3bdf_2f2d52306e504e9da1626466c1f892ca~mv2.jpg" alt="Graceland Girls' Secondary School logo"></div>
+      <div class="brand-name">Graceland Girls'</div>
     </a>
     <nav>
       <ul>
@@ -272,14 +311,15 @@
 <div id="top" class="hero">
   <div class="hero-bg" id="heroSlides">
     <div class="hslide active" style="background-image:url('https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_1920,h_1280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg');"></div>
-
+    <div class="hslide" style="background-image:url('https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_1920,h_1280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg');"></div>
+    <div class="hslide" style="background-image:url('https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_1920,h_1280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg');"></div>
     <div class="hero-scrim"></div>
   </div>
   <div class="hero-content">
-    <div class="tag hero-eyebrow"><span class="dot"></span>Gulu, Northern Uganda</div>
+    <div class="tag hero-eyebrow"><span class="dot"></span>Gulu, Northern Uganda — Est. 2009</div>
     <h1>
-      <span class="line"><span>Where girls receive</span></span>
-      <span class="line"><span>the education their ambitions deserve</span></span>
+      <span class="line"><span>Where girls get the</span></span>
+      <span class="line"><span>education their ambitions deserve</span></span>
     </h1>
     <p>Graceland Girls' Secondary School is a licensed, UNEB-registered school in Gulu, teaching just over 400 students on a 6.3-acre campus — from Senior One straight through to national exams.</p>
     <div class="btn-row">
@@ -287,7 +327,11 @@
       <a href="#academics" class="btn btn-outline magnetic">See Academics</a>
     </div>
   </div>
-
+  <div class="slide-dots" id="slideDots">
+    <button class="active" data-slide="0"></button>
+    <button data-slide="1"></button>
+    <button data-slide="2"></button>
+  </div>
 </div>
 
 <div class="ticker">
@@ -310,8 +354,13 @@
 
 <section id="about">
   <div class="wrap about-grid">
-    <div class="wipe-frame reveal" data-observe>
-      <img class="about-photo" src="https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_900,h_1080,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg" alt="Students at Graceland">
+    <div class="about-photo-wrap reveal" data-observe>
+      <div class="wipe-frame main-shot">
+        <img class="about-photo" src="https://static.wixstatic.com/media/fb3bdf_15a8babac53d4a68ac1a9a13d483621b~mv2.jpeg" alt="Students at Graceland Girls' Secondary School">
+      </div>
+      <div class="accent-shot">
+        <img src="https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_500,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg" alt="Graceland campus">
+      </div>
     </div>
     <div class="about-copy reveal" data-observe>
       <div class="tag" style="margin-bottom:16px;">Our Story</div>
@@ -332,9 +381,18 @@
     <figure><img src="https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_680,h_480,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg" alt="Campus"><figcaption>Campus · Gulu</figcaption></figure>
     <figure><img src="https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_680,h_480,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg" alt="Students"><figcaption>Students</figcaption></figure>
     <figure><img src="https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_680,h_480,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg" alt="Grounds"><figcaption>Campus Grounds</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_89d6be8fe4bd4e668178490007675721~mv2.jpg" alt="Life at Graceland"><figcaption>On Campus</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_a470ba316435429f98e41470c0d6a777~mv2.jpg" alt="Life at Graceland"><figcaption>Student Life</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_29fd526a80134460aa0200abd2de7560~mv2.jpg" alt="Life at Graceland"><figcaption>Graceland Community</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_c81809c912c24dfdb0d8dfda0e215b94~mv2.jpg" alt="Life at Graceland"><figcaption>Campus Life</figcaption></figure>
+
     <figure><img src="https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_680,h_480,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg" alt="Campus"><figcaption>Campus · Gulu</figcaption></figure>
     <figure><img src="https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_680,h_480,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg" alt="Students"><figcaption>Students</figcaption></figure>
     <figure><img src="https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_680,h_480,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg" alt="Grounds"><figcaption>Campus Grounds</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_89d6be8fe4bd4e668178490007675721~mv2.jpg" alt="Life at Graceland"><figcaption>On Campus</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_a470ba316435429f98e41470c0d6a777~mv2.jpg" alt="Life at Graceland"><figcaption>Student Life</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_29fd526a80134460aa0200abd2de7560~mv2.jpg" alt="Life at Graceland"><figcaption>Graceland Community</figcaption></figure>
+    <figure><img src="https://static.wixstatic.com/media/fb3bdf_c81809c912c24dfdb0d8dfda0e215b94~mv2.jpg" alt="Life at Graceland"><figcaption>Campus Life</figcaption></figure>
   </div>
 </div>
 
@@ -346,22 +404,30 @@
     </div>
     <div class="pillar-grid tilt-group">
       <div class="pillar tilt-card">
-        <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 5v14a2 2 0 0 0 2 2h13V7a2 2 0 0 0-2-2H4Z"/><path d="M4 5a2 2 0 0 1 2-2h13v14"/></svg></div>
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="4.6"/><line x1="12" y1="19.4" x2="12" y2="22"/><line x1="2" y1="12" x2="4.6" y2="12"/><line x1="19.4" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
+        </div>
         <h3>Curious Minds</h3>
         <p>Reading beyond the syllabus, treating new experience as part of learning.</p>
       </div>
       <div class="pillar tilt-card">
-        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></div>
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M12 13c0-4 -3-6-7-6 0 4 3 6 7 6Z" fill="currentColor"/><path d="M12 10c0-3.2 2.6-5.4 6-5.4 0 3.2-2.6 5.4-6 5.4Z" fill="currentColor"/></svg>
+        </div>
         <h3>Independent Learners</h3>
         <p>Working through a problem without needing every step walked through.</p>
       </div>
       <div class="pillar tilt-card">
-        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3 2 12l10 9 10-9-10-9Z"/></svg></div>
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><ellipse cx="10" cy="14" rx="5" ry="3.4" fill="currentColor"/><path d="M13 12C15 9 16 6 15 3c-1.5 1-2.6 3-2.6 5.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="15.4" cy="3.4" r="1.3" fill="currentColor"/><path d="M16.5 3 18 2.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M8 17l-1.4 4M12 17l1 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M14.6 2.2c.6-.6 1.6-.6 1.6-.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
         <h3>Confident Individuals</h3>
         <p>Comfortable outside what's familiar, ready when opportunity appears.</p>
       </div>
       <div class="pillar tilt-card">
-        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg></div>
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><path d="M6 8h12l-1.6 10a2 2 0 0 1-2 1.7h-4.8a2 2 0 0 1-2-1.7L6 8Z" fill="currentColor"/><ellipse cx="12" cy="8" rx="6" ry="2.2" fill="currentColor"/><path d="M7 11h10M6.5 14h11" stroke="#fff" stroke-width="0.9" opacity="0.5"/></svg>
+        </div>
         <h3>Responsible Citizens</h3>
         <p>An education that benefits Gulu and Uganda, not just themselves.</p>
       </div>
@@ -391,18 +457,25 @@
 </section>
 
 <section id="facilities" class="facilities">
-  <div class="wrap">
-    <div class="section-head reveal" data-observe style="margin-bottom:44px;">
-      <h2 style="color:#fff;">On campus</h2>
-      <div class="desc">Facilities built for daily life, not just lessons.</div>
+  <div class="wrap facilities-grid">
+    <div>
+      <div class="section-head reveal" data-observe style="margin-bottom:44px;">
+        <h2 style="color:#fff;">On campus</h2>
+        <div class="desc">Facilities built for daily life, not just lessons.</div>
+      </div>
+      <div class="fac-list reveal-stagger" data-observe>
+        <div class="fac-row"><span class="idx">01</span><h3>Classrooms</h3><p>13 classrooms in active daily use across every year group.</p></div>
+        <div class="fac-row"><span class="idx">02</span><h3>Dining Hall</h3><p>Seats all 400 students for shared meals.</p></div>
+        <div class="fac-row"><span class="idx">03</span><h3>Library</h3><p>A quiet space for reading beyond the syllabus.</p></div>
+        <div class="fac-row"><span class="idx">04</span><h3>Science Laboratory</h3><p>Hands-on space for practical coursework.</p></div>
+        <div class="fac-row"><span class="idx">05</span><h3>Students' Canteen</h3><p>A second gathering point outside class hours.</p></div>
+        <div class="fac-row"><span class="idx">06</span><h3>Boarding &amp; Sick Bay</h3><p>On-site accommodation with dedicated student care.</p></div>
+      </div>
     </div>
-    <div class="fac-list reveal-stagger" data-observe>
-      <div class="fac-row"><span class="idx">01</span><h3>Classrooms</h3><p>13 classrooms in active daily use across every year group.</p></div>
-      <div class="fac-row"><span class="idx">02</span><h3>Dining Hall</h3><p>Seats all 400 students for shared meals.</p></div>
-      <div class="fac-row"><span class="idx">03</span><h3>Library</h3><p>A quiet space for reading beyond the syllabus.</p></div>
-      <div class="fac-row"><span class="idx">04</span><h3>Science Laboratory</h3><p>Hands-on space for practical coursework.</p></div>
-      <div class="fac-row"><span class="idx">05</span><h3>Students' Canteen</h3><p>A second gathering point outside class hours.</p></div>
-      <div class="fac-row"><span class="idx">06</span><h3>Boarding &amp; Sick Bay</h3><p>On-site accommodation with dedicated student care.</p></div>
+    <div class="collage">
+      <div class="collage-item collage-a" data-observe><img src="https://static.wixstatic.com/media/fb3bdf_240785f7e0f24b1fa2a0370123bcf520~mv2.jpg" alt="On campus at Graceland"></div>
+      <div class="collage-item collage-b" data-observe><img src="https://static.wixstatic.com/media/fb3bdf_4a78a5303a5b4839ab452be74015a560~mv2.jpg" alt="On campus at Graceland"></div>
+      <div class="collage-item collage-c" data-observe><img src="https://static.wixstatic.com/media/fb3bdf_75776bb024884c6b96db3fa8cdc00f13~mv2.jpg" alt="On campus at Graceland"></div>
     </div>
   </div>
 </section>
@@ -415,19 +488,25 @@
     </div>
     <div class="join-grid tilt-group">
       <a href="https://www.gracelandgirlsschool.com/join-graceland" class="join-card tilt-card">
-        <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></div>
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5v-13Z" fill="currentColor"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5v-13Z" fill="currentColor" opacity="0.55"/></svg>
+        </div>
         <h3>Student Applications</h3>
         <p>Apply as a boarding student — places open each year, subject to availability.</p>
         <span class="go magnetic">Email Admissions →</span>
       </a>
       <a href="https://www.gracelandgirlsschool.com/join-graceland" class="join-card tilt-card">
-        <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><path d="M12 4 2 9l10 5 8-4v5h1.4V9L12 4Z" fill="currentColor"/><path d="M6 11.2v3.6c0 1.7 2.7 3.2 6 3.2s6-1.5 6-3.2v-3.6l-6 3-6-3Z" fill="currentColor" opacity="0.55"/></svg>
+        </div>
         <h3>Careers at Graceland</h3>
         <p>We hire trained, qualified teachers who lead with knowledge and patience.</p>
         <span class="go magnetic">Enquire About Openings →</span>
       </a>
       <a href="https://www.gracelandgirlsschool.com/latest-news-at-graceland" class="join-card tilt-card">
-        <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H8l-4 4V4Z"/></svg></div>
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><path d="M12 21v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M12 14c0-3.4-2.6-5.8-6-5.8 0 3.4 2.6 5.8 6 5.8Z" fill="currentColor"/><path d="M12 11.6c0-2.8 2.2-4.8 5-4.8 0 2.8-2.2 4.8-5 4.8Z" fill="currentColor"/><path d="M6 21c0-2.2 2.7-4 6-4s6 1.8 6 4H6Z" fill="currentColor" opacity="0.5"/></svg>
+        </div>
         <h3>Partners &amp; Donors</h3>
         <p>Support an established, accredited school already teaching 400+ students.</p>
         <span class="go magnetic">Contact Us →</span>
