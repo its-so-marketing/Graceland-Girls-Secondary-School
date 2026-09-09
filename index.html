@@ -54,32 +54,35 @@
   .reveal-stagger.in > *:nth-child(5){transition-delay:.30s;}
   .reveal-stagger.in > *:nth-child(6){transition-delay:.37s;}
 
-  /* ---------- image curtain-wipe reveal ---------- */
+  /* ---------- one-shot zoom in / zoom out / settle, replayed on re-entry ---------- */
+  .kb-target{transform:scale(1.02);}
+  .kb-target.kb-play{animation:kenburns 8s cubic-bezier(.45,.05,.55,.95) 1 forwards;}
+  @keyframes kenburns{ 0%{transform:scale(1.02);} 50%{transform:scale(1.15);} 100%{transform:scale(1.02);} }
+
+  /* ---------- image curtain-wipe reveal (first appearance only) ---------- */
   .wipe-frame{position:relative; overflow:hidden; border-radius:8px; border:1px solid var(--line);}
   .wipe-frame::after{
     content:""; position:absolute; inset:0; background:var(--burgundy); z-index:2;
     transform-origin:right; transform:scaleX(1); transition:transform .9s cubic-bezier(.76,0,.24,1);
   }
   .wipe-frame.in::after{transform:scaleX(0);}
-  .wipe-frame img{transform:scale(1.12); transition:transform 1.4s cubic-bezier(.16,.84,.44,1);}
-  .wipe-frame.in img{transform:scale(1);}
 
   /* ---------- nav ---------- */
   header{
     position:fixed; top:0; left:0; right:0; z-index:100;
-    background:rgba(247,240,227,0.88); backdrop-filter:blur(10px);
+    background:rgba(255,255,255,0.96); backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
-  .navbar{display:flex; align-items:center; justify-content:space-between; padding:16px 40px; max-width:1200px; margin:0 auto;}
-  .brand{display:flex; align-items:center; gap:12px;}
+  .navbar{display:flex; align-items:center; justify-content:space-between; padding:14px 40px; max-width:1200px; margin:0 auto;}
+  .brand{display:flex; align-items:center; gap:14px;}
   .brand-mark{
-    width:38px; height:38px; border-radius:8px; background:#fff;
+    width:56px; height:56px; border-radius:10px; background:#fff;
     display:flex; align-items:center; justify-content:center; overflow:hidden;
-    border:1px solid var(--line); flex-shrink:0;
+    flex-shrink:0;
   }
-  .brand-mark img{width:100%; height:100%; object-fit:cover;}
-  .brand-name{font-family:'Fraunces',serif; font-weight:700; font-size:1rem;}
-  nav ul{list-style:none; display:flex; gap:36px;}
+  .brand-mark img{width:100%; height:100%; object-fit:contain;}
+  .brand-name{font-family:'Fraunces',serif; font-weight:700; font-size:1.05rem; line-height:1.15; max-width:15ch;}
+  nav ul{list-style:none; display:flex; gap:28px;}
   nav a{font-size:0.9rem; font-weight:500; color:var(--ink-soft); position:relative; padding-bottom:3px;}
   nav a::after{content:""; position:absolute; left:0; bottom:0; width:0; height:1.5px; background:var(--burgundy); transition:width .25s ease;}
   nav a:hover::after, nav a.active::after{width:100%;}
@@ -88,7 +91,7 @@
   .nav-cta:hover{background:var(--burgundy-deep);}
   .menu-toggle{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer;}
   .menu-toggle span{width:22px; height:2px; background:var(--ink);}
-  @media (max-width:880px){ nav, .nav-cta{display:none;} .menu-toggle{display:flex;} }
+  @media (max-width:960px){ nav, .nav-cta{display:none;} .menu-toggle{display:flex;} }
 
   /* ---------- index rail ---------- */
   .rail{position:fixed; right:26px; top:50%; transform:translateY(-50%); z-index:90; display:flex; flex-direction:column; gap:16px;}
@@ -99,13 +102,11 @@
   .rail a.active .rdot{background:var(--burgundy); transform:scale(1.6);}
   @media (max-width:1180px){ .rail{display:none;} }
 
-  /* ---------- hero: full-bleed ---------- */
+  /* ---------- hero: full-bleed, single image ---------- */
   .hero{position:relative; min-height:100vh; display:flex; align-items:flex-end; overflow:hidden;}
   .hero-bg{position:absolute; inset:0;}
-  .hslide{position:absolute; inset:0; opacity:0; background-size:cover; background-position:center 32%; transition:opacity 1.6s ease; transform:scale(1.05);}
-  .hslide.active{opacity:1; animation:kenburns 10s ease-in-out infinite alternate;}
-  @keyframes kenburns{ from{transform:scale(1.05) translate(0,0);} to{transform:scale(1.16) translate(-1.5%,-1%);} }
-  .hero-scrim{position:absolute; inset:0; z-index:1; background:linear-gradient(190deg, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.38) 38%, rgba(0,0,0,0.88) 100%);}
+  .hslide{position:absolute; inset:0; background-size:cover; background-position:center 32%;}
+  .hero-scrim{position:absolute; inset:0; z-index:1; background:linear-gradient(190deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.16) 35%, rgba(0,0,0,0.60) 100%);}
   .hero-content{position:relative; z-index:2; padding:0 40px 96px; max-width:1200px; margin:0 auto; width:100%; color:#fff;}
   .hero-eyebrow{margin-bottom:24px; color:var(--gold);}
   .hero-eyebrow .dot{background:var(--gold); position:relative;}
@@ -116,18 +117,15 @@
   .line:nth-child(1) span{animation-delay:.05s;}
   .line:nth-child(2) span{animation-delay:.16s;}
   @keyframes lineUp{ to{ transform:translateY(0);} }
-  .hero h1{font-size:clamp(2.4rem,5.2vw,4.2rem); max-width:16ch; margin-bottom:26px; color:#fff;}
-  .hero p{color:rgba(255,255,255,0.85); max-width:46ch; font-size:1.08rem; margin-bottom:38px; opacity:0; animation:fadeUp .8s ease forwards; animation-delay:.5s;}
+  .hero h1{font-size:clamp(2.4rem,5.2vw,4.2rem); max-width:17ch; margin-bottom:26px; color:#fff;}
+  .hero p{color:rgba(255,255,255,0.9); max-width:46ch; font-size:1.08rem; margin-bottom:38px; opacity:0; animation:fadeUp .8s ease forwards; animation-delay:.5s; text-shadow:0 1px 12px rgba(0,0,0,0.35);}
   .btn-row{display:flex; gap:14px; flex-wrap:wrap; opacity:0; animation:fadeUp .8s ease forwards; animation-delay:.62s;}
   @keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
   .btn{font-size:0.88rem; font-weight:600; padding:14px 26px; border-radius:6px; display:inline-block; will-change:transform;}
   .btn-solid{background:var(--burgundy); color:#fff;}
   .btn-solid:hover{background:var(--burgundy-deep);}
-  .btn-outline{border:1.5px solid rgba(255,255,255,0.55); color:#fff;}
-  .btn-outline:hover{border-color:#fff; background:rgba(255,255,255,0.08);}
-  .slide-dots{position:absolute; z-index:3; bottom:28px; right:40px; display:flex; gap:8px;}
-  .slide-dots button{width:8px; height:8px; border-radius:50%; border:1.5px solid rgba(255,255,255,0.6); background:transparent; cursor:pointer; padding:0;}
-  .slide-dots button.active{background:var(--gold); border-color:var(--gold);}
+  .btn-outline{border:1.5px solid rgba(255,255,255,0.7); color:#fff;}
+  .btn-outline:hover{border-color:#fff; background:rgba(255,255,255,0.1);}
   @media (max-width:880px){ .hero-content{padding-bottom:64px;} }
 
   /* ---------- ticker ---------- */
@@ -154,28 +152,18 @@
   .section-head h2{font-size:clamp(1.8rem,3.2vw,2.5rem); max-width:14ch;}
   .section-head .desc{max-width:38ch; color:var(--ink-soft); font-size:0.98rem;}
 
-  /* ---------- about ---------- */
-  .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:76px; align-items:center;}
-  .about-photo-wrap{position:relative;}
-  .wipe-frame.main-shot{border:5px solid var(--card); transform:rotate(-1.6deg); box-shadow:0 22px 44px rgba(42,26,25,0.2);}
-  .about-photo{width:100%; height:540px; object-fit:cover;}
-  .accent-shot{
-    position:absolute; width:40%; aspect-ratio:1/1; bottom:-30px; left:-30px; z-index:3;
-    border-radius:10px; overflow:hidden; border:5px solid var(--card);
-    box-shadow:0 16px 32px rgba(42,26,25,0.28); transform:rotate(6deg);
-    transition:transform .35s ease;
-  }
-  .accent-shot img{width:100%; height:100%; object-fit:cover;}
-  .about-photo-wrap:hover .accent-shot{transform:rotate(-1deg) scale(1.05);}
+  /* ---------- about: single, larger, zoom-then-static image ---------- */
+  .about-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center;}
+  .wipe-frame.main-shot{border:5px solid var(--card); box-shadow:0 22px 44px rgba(42,26,25,0.2);}
+  .about-photo{width:100%; height:640px; object-fit:cover;}
   .about-copy p{color:var(--ink-soft); margin-bottom:18px; font-size:1.02rem;}
   .quote-block{border-left:2px solid var(--burgundy); padding-left:20px; margin:28px 0; font-family:'Fraunces',serif; font-weight:600; font-size:1.15rem; color:var(--ink);}
   .credential-row{display:flex; gap:12px; margin-top:24px; flex-wrap:wrap;}
   .credential{border:1px solid var(--line); border-radius:6px; padding:9px 14px; font-size:0.78rem; font-weight:500; color:var(--ink-soft); display:flex; align-items:center; gap:8px; background:var(--card);}
   .credential .dot{width:6px; height:6px; border-radius:50%; background:var(--burgundy);}
   @media (max-width:880px){
-    .about-grid{grid-template-columns:1fr; gap:52px;}
-    .about-photo{height:320px;}
-    .accent-shot{width:34%; bottom:-18px; left:14px;}
+    .about-grid{grid-template-columns:1fr; gap:36px;}
+    .about-photo{height:360px;}
   }
 
   /* ---------- filmstrip ---------- */
@@ -215,7 +203,7 @@
   .academics-copy p{color:var(--ink-soft); margin-bottom:18px; font-size:1.02rem;}
   @media (max-width:880px){ .academics-grid{grid-template-columns:1fr; gap:16px;} }
 
-  /* ---------- facilities: text + photo collage ---------- */
+  /* ---------- facilities: text + photo slideshow ---------- */
   .facilities{background:var(--burgundy-deep); color:#fff;}
   .facilities .desc{color:rgba(255,255,255,0.65);}
   .facilities-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:start;}
@@ -225,27 +213,16 @@
   .fac-row h3{font-size:1.05rem; font-weight:700;}
   .fac-row p{font-size:0.9rem; color:rgba(255,255,255,0.65);}
   @media (max-width:700px){ .fac-row{grid-template-columns:40px 1fr; row-gap:6px;} .fac-row p{grid-column:2;} }
-  .collage{position:relative; height:480px;}
-  .collage-item{
-    position:absolute; border-radius:10px; overflow:hidden; border:4px solid rgba(255,255,255,0.14);
-    box-shadow:0 20px 40px rgba(0,0,0,0.4); transition:transform .35s ease, opacity .7s ease;
-    opacity:0; transform:translateY(24px);
-  }
-  .collage-item.in{opacity:1; transform:none;}
-  .collage-item:hover{z-index:5 !important;}
-  .collage-item img{width:100%; height:100%; object-fit:cover; display:block;}
-  .collage-a{width:64%; height:58%; top:0; left:0; z-index:2;}
-  .collage-a.in{transform:rotate(-3deg);}
-  .collage-a:hover{transform:rotate(0deg) scale(1.03) !important;}
-  .collage-b{width:52%; height:48%; bottom:0; right:0; z-index:3;}
-  .collage-b.in{transform:rotate(3deg);}
-  .collage-b:hover{transform:rotate(0deg) scale(1.03) !important;}
-  .collage-c{width:38%; height:36%; top:26%; right:4%; z-index:1;}
-  .collage-c.in{transform:rotate(-5deg);}
-  .collage-c:hover{transform:rotate(0deg) scale(1.03) !important;}
+  .campus-slideshow{position:relative; height:480px; border-radius:10px; overflow:hidden; border:1px solid rgba(255,255,255,0.16); box-shadow:0 20px 40px rgba(0,0,0,0.4);}
+  .cf-slide{position:absolute; inset:0; opacity:0; transition:opacity 1.1s ease;}
+  .cf-slide.active{opacity:1;}
+  .cf-slide img{width:100%; height:100%; object-fit:cover;}
+  .slide-dots{position:absolute; z-index:3; bottom:16px; right:16px; display:flex; gap:8px;}
+  .slide-dots button{width:8px; height:8px; border-radius:50%; border:1.5px solid rgba(255,255,255,0.6); background:transparent; cursor:pointer; padding:0;}
+  .slide-dots button.active{background:var(--gold); border-color:var(--gold);}
   @media (max-width:880px){
     .facilities-grid{grid-template-columns:1fr; gap:12px;}
-    .collage{height:340px; margin-top:20px;}
+    .campus-slideshow{height:300px; margin-top:20px;}
   }
 
   /* ---------- join ---------- */
@@ -285,7 +262,7 @@
   <div class="navbar">
     <a href="#top" class="brand">
       <div class="brand-mark"><img src="https://static.wixstatic.com/media/fb3bdf_2f2d52306e504e9da1626466c1f892ca~mv2.jpg" alt="Graceland Girls' Secondary School logo"></div>
-      <div class="brand-name">Graceland Girls'</div>
+      <div class="brand-name">Graceland Girls' Secondary School</div>
     </a>
     <nav>
       <ul>
@@ -309,16 +286,14 @@
 </div>
 
 <div id="top" class="hero">
-  <div class="hero-bg" id="heroSlides">
-    <div class="hslide active" style="background-image:url('https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_1920,h_1280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg');"></div>
-    <div class="hslide" style="background-image:url('https://static.wixstatic.com/media/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg/v1/fill/w_1920,h_1280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_098bd6c52d014c9da196c7c10a0bdb23~mv2.jpg');"></div>
-    <div class="hslide" style="background-image:url('https://static.wixstatic.com/media/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg/v1/fill/w_1920,h_1280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_c66466d856584415b0c32f69c99d60fd~mv2.jpg');"></div>
+  <div class="hero-bg">
+    <div class="hslide kb-target" id="heroSlide" style="background-image:url('https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_1920,h_1280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg');"></div>
     <div class="hero-scrim"></div>
   </div>
   <div class="hero-content">
-    <div class="tag hero-eyebrow"><span class="dot"></span>Gulu, Northern Uganda — Est. 2009</div>
+    <div class="tag hero-eyebrow"><span class="dot"></span>Gulu, Northern Uganda</div>
     <h1>
-      <span class="line"><span>Where girls get the</span></span>
+      <span class="line"><span>Where girls receive the</span></span>
       <span class="line"><span>education their ambitions deserve</span></span>
     </h1>
     <p>Graceland Girls' Secondary School is a licensed, UNEB-registered school in Gulu, teaching just over 400 students on a 6.3-acre campus — from Senior One straight through to national exams.</p>
@@ -326,11 +301,6 @@
       <a href="#join" class="btn btn-solid magnetic">Apply to Graceland</a>
       <a href="#academics" class="btn btn-outline magnetic">See Academics</a>
     </div>
-  </div>
-  <div class="slide-dots" id="slideDots">
-    <button class="active" data-slide="0"></button>
-    <button data-slide="1"></button>
-    <button data-slide="2"></button>
   </div>
 </div>
 
@@ -354,13 +324,8 @@
 
 <section id="about">
   <div class="wrap about-grid">
-    <div class="about-photo-wrap reveal" data-observe>
-      <div class="wipe-frame main-shot">
-        <img class="about-photo" src="https://static.wixstatic.com/media/fb3bdf_15a8babac53d4a68ac1a9a13d483621b~mv2.jpeg" alt="Students at Graceland Girls' Secondary School">
-      </div>
-      <div class="accent-shot">
-        <img src="https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_500,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg" alt="Graceland campus">
-      </div>
+    <div class="wipe-frame main-shot reveal" data-observe>
+      <img class="about-photo kb-target" id="aboutImg" src="https://static.wixstatic.com/media/fb3bdf_15a8babac53d4a68ac1a9a13d483621b~mv2.jpeg" alt="Students at Graceland Girls' Secondary School">
     </div>
     <div class="about-copy reveal" data-observe>
       <div class="tag" style="margin-bottom:16px;">Our Story</div>
@@ -472,10 +437,15 @@
         <div class="fac-row"><span class="idx">06</span><h3>Boarding &amp; Sick Bay</h3><p>On-site accommodation with dedicated student care.</p></div>
       </div>
     </div>
-    <div class="collage">
-      <div class="collage-item collage-a" data-observe><img src="https://static.wixstatic.com/media/fb3bdf_240785f7e0f24b1fa2a0370123bcf520~mv2.jpg" alt="On campus at Graceland"></div>
-      <div class="collage-item collage-b" data-observe><img src="https://static.wixstatic.com/media/fb3bdf_4a78a5303a5b4839ab452be74015a560~mv2.jpg" alt="On campus at Graceland"></div>
-      <div class="collage-item collage-c" data-observe><img src="https://static.wixstatic.com/media/fb3bdf_75776bb024884c6b96db3fa8cdc00f13~mv2.jpg" alt="On campus at Graceland"></div>
+    <div class="campus-slideshow reveal" data-observe id="campusSlides">
+      <div class="cf-slide active"><img src="https://static.wixstatic.com/media/fb3bdf_240785f7e0f24b1fa2a0370123bcf520~mv2.jpg" alt="On campus at Graceland"></div>
+      <div class="cf-slide"><img src="https://static.wixstatic.com/media/fb3bdf_4a78a5303a5b4839ab452be74015a560~mv2.jpg" alt="On campus at Graceland"></div>
+      <div class="cf-slide"><img src="https://static.wixstatic.com/media/fb3bdf_75776bb024884c6b96db3fa8cdc00f13~mv2.jpg" alt="On campus at Graceland"></div>
+      <div class="slide-dots" id="campusDots">
+        <button class="active" data-slide="0"></button>
+        <button data-slide="1"></button>
+        <button data-slide="2"></button>
+      </div>
     </div>
   </div>
 </section>
@@ -583,17 +553,22 @@
   }, { threshold: 0.6 });
   countEls.forEach(el => countIo.observe(el));
 
-  // ---- hero slideshow ----
-  const slides = document.querySelectorAll('#heroSlides .hslide');
-  const dots = document.querySelectorAll('#slideDots button');
-  let slideIdx = 0;
-  function showSlide(i){
-    slides.forEach((s,n) => s.classList.toggle('active', n === i));
-    dots.forEach((d,n) => d.classList.toggle('active', n === i));
-    slideIdx = i;
+  // ---- one-shot zoom-in/zoom-out/settle, replayed each time the element re-enters view ----
+  function setupKenBurns(el, threshold){
+    if (!el) return;
+    const io2 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          el.classList.remove('kb-play');
+          void el.offsetWidth; // force reflow so the animation restarts
+          el.classList.add('kb-play');
+        }
+      });
+    }, { threshold: threshold || 0.4 });
+    io2.observe(el);
   }
-  dots.forEach(d => d.addEventListener('click', () => showSlide(parseInt(d.dataset.slide))));
-  setInterval(() => showSlide((slideIdx + 1) % slides.length), 5000);
+  setupKenBurns(document.getElementById('heroSlide'), 0.3);
+  setupKenBurns(document.getElementById('aboutImg'), 0.4);
 
   // ---- tilt cards ----
   if (window.matchMedia('(pointer:fine)').matches) {
@@ -617,6 +592,20 @@
       });
       btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0,0)'; });
     });
+  }
+
+  // ---- campus photo slideshow (facilities section) ----
+  const campusSlides = document.querySelectorAll('#campusSlides .cf-slide');
+  const campusDots = document.querySelectorAll('#campusDots button');
+  let campusIdx = 0;
+  function showCampusSlide(i){
+    campusSlides.forEach((s,n) => s.classList.toggle('active', n === i));
+    campusDots.forEach((d,n) => d.classList.toggle('active', n === i));
+    campusIdx = i;
+  }
+  campusDots.forEach(d => d.addEventListener('click', () => showCampusSlide(parseInt(d.dataset.slide))));
+  if (campusSlides.length > 1) {
+    setInterval(() => showCampusSlide((campusIdx + 1) % campusSlides.length), 4500);
   }
 
   // ---- scrollspy: nav + rail + catalog active row ----
