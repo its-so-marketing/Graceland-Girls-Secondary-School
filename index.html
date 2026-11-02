@@ -128,6 +128,9 @@
   .btn-outline:hover{border-color:#fff; background:rgba(255,255,255,0.1);}
   @media (max-width:880px){ .hero-content{padding-bottom:64px;} }
 
+  /* ---------- full-bleed photo band (same size and overlay as the hero, no text) ---------- */
+  .photo-band{position:relative; min-height:100vh; overflow:hidden;}
+
   /* ---------- ticker ---------- */
   .ticker{background:var(--burgundy-deep); overflow:hidden; padding:15px 0; white-space:nowrap;}
   .ticker-track{display:inline-flex; animation:tick 28s linear infinite;}
@@ -287,7 +290,7 @@
 
 <div id="top" class="hero">
   <div class="hero-bg">
-    <div class="hslide kb-target" id="heroSlide" style="background-image:url('https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_1920,h_1280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg');"></div>
+    <div class="hslide kb-target" id="heroSlide" style="background-image:url('https://static.wixstatic.com/media/fb3bdf_c24aebe1a780406496b2e749fc08fb08~mv2.jpg');"></div>
     <div class="hero-scrim"></div>
   </div>
   <div class="hero-content">
@@ -339,6 +342,13 @@
     </div>
   </div>
 </section>
+
+<div class="photo-band">
+  <div class="hero-bg">
+    <div class="hslide kb-target" id="bandSlide" style="background-image:url('https://static.wixstatic.com/media/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg/v1/fill/w_1920,h_1280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb3bdf_50324f7bd2c442b1845c2b2b73e30914~mv2.jpeg');"></div>
+    <div class="hero-scrim"></div>
+  </div>
+</div>
 
 <div class="filmstrip-wrap">
   <div class="filmstrip">
@@ -567,6 +577,7 @@
     io2.observe(el);
   }
   setupKenBurns(document.getElementById('heroSlide'), 0.3);
+  setupKenBurns(document.getElementById('bandSlide'), 0.3);
   setupKenBurns(document.getElementById('aboutImg'), 0.4);
 
   // ---- tilt cards ----
